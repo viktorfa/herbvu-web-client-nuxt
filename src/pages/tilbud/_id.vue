@@ -14,32 +14,34 @@
     </div>
     <div class="text-xs-center" v-show="!isLoadingDetailProduct" v-if="product">
       <div class="flex justify-center">
-        <v-card text class="w-full max-w-4xl">
-          <h1 class="text-3xl text-center w-full">{{product.title}}</h1>
-          <v-img :src="product.image_url" aspect-ratio="2.4" contain :alt="product.title"></v-img>
-          <p class="text-red-500 text-lg" v-if="offerExpired">Dette tilbudet er dessverre utgått.</p>
-          <div class="flex flex-col items-center">
-            <h3 class="headline mb-0">{{ formatPrice(product.price) }}</h3>
-            <div>{{ product.description }}</div>
-            <div>{{ product.value }}</div>
-            <v-img
-              v-if="dealerLogoSrc"
-              class="dealer-logo-image"
-              :src="dealerLogoSrc"
-              :alt="product.dealer"
-              contain
-              width="160"
-              max-height="32"
-            />
-            <div v-else>{{ product.dealer }}</div>
-          </div>
-          <v-card-actions>
-            <v-btn outlined text color="orange" :href="product.href" target="_blank">Se annonse</v-btn>
-            <no-ssr>
-              <ProductShareDialog :product="product" />
-            </no-ssr>
-          </v-card-actions>
-        </v-card>
+        <div class="w-full max-w-4xl">
+          <v-card text>
+            <h1 class="text-3xl text-center w-full">{{product.title}}</h1>
+            <v-img :src="product.image_url" aspect-ratio="2.4" contain :alt="product.title"></v-img>
+            <p class="text-red-500 text-lg" v-if="offerExpired">Dette tilbudet er dessverre utgått.</p>
+            <div class="flex flex-col items-center">
+              <h3 class="headline mb-0">{{ formatPrice(product.price) }}</h3>
+              <div>{{ product.description }}</div>
+              <div>{{ product.value }}</div>
+              <v-img
+                v-if="dealerLogoSrc"
+                class="dealer-logo-image"
+                :src="dealerLogoSrc"
+                :alt="product.dealer"
+                contain
+                width="160"
+                max-height="32"
+              />
+              <div v-else>{{ product.dealer }}</div>
+            </div>
+            <v-card-actions>
+              <v-btn outlined text color="orange" :href="product.href" target="_blank">Se annonse</v-btn>
+              <no-ssr>
+                <ProductShareDialog :product="product" />
+              </no-ssr>
+            </v-card-actions>
+          </v-card>
+        </div>
       </div>
       <h2
         v-show="_similarProducts.length > 0"

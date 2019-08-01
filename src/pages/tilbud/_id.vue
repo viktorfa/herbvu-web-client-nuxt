@@ -40,7 +40,7 @@ import { mapState } from "vuex";
 
 import ProductList from "~/components/ProductList";
 import ProductDetail from "~/components/ProductDetail";
-import { getStandardProduct, formatPrice } from "~/util/lib";
+import { getStandardProduct } from "~/util/lib";
 import { getAllMetaInfoForProduct, getAllMetaInfo } from "~/util/meta-tags";
 
 export default {
@@ -81,7 +81,7 @@ export default {
     },
   },
   methods: {
-    handleClickMenu: function() {
+    handleClickMenu() {
       this.$router.go(-1);
     },
   },

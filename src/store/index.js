@@ -6,7 +6,7 @@ const initialState = {
   isSearching: false,
   queryString: "",
   searchQuery: "",
-  isLoadingPromotedProducts: true,
+  isLoadingPromotedProducts: false,
   isLoadingSimilarProducts: false,
   isLoadingDetailProduct: false,
   searchResults: [],

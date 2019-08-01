@@ -1,25 +1,3 @@
-import { getAutocompleteData } from "@/api";
-
-let autocompleteData = {
-  tokens: [],
-  bigrams: [],
-  fullgrams: [],
-};
-
-const initalize = async () => {
-  const { ok, data, error } = await getAutocompleteData();
-  if (ok) {
-    autocompleteData = {
-      tokens: data.heading_tokens,
-      bigrams: data.heading_bigrams,
-      fullgrams: data.heading_fullgrams,
-    };
-  } else {
-    console.warn("Could not load autocomplete data");
-    console.warn(error);
-  }
-};
-
 const defaultAutocomplete = [
   "pepsi max",
   "grandiosa",
@@ -31,10 +9,7 @@ const defaultAutocomplete = [
   "laks",
 ];
 
-export const getHints = (
-  query,
-  { tokens, bigrams, fullgrams } = autocompleteData,
-) => {
+export const getHints = (query, { tokens, bigrams, fullgrams }) => {
   if (!query || query.length === 0) return defaultAutocomplete;
   else if (query.lastIndexOf(" ") !== -1) {
     return [...fullgrams, ...bigrams];
@@ -42,5 +17,3 @@ export const getHints = (
     return [...defaultAutocomplete, ...tokens];
   }
 };
-
-initalize();

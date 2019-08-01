@@ -1,0 +1,23 @@
+@import "./variables.css";
+@import "./tailwind.css";
+
+.offer-search-results .result-list-item {
+  border-color: var(--offer-color);
+}
+.kolonial-search-results .result-list-item {
+  border-color: var(--kolonial-color);
+}
+.meny-search-results .result-list-item {
+  border-color: var(--meny-color);
+}
+.europris-search-results .result-list-item {
+  border-color: var(--europris-color);
+}
+
+.search-input {
+  margin: 0.3em 0.3em 0 0.3em !important;
+  background-color: var(--background-color) !important;
+}
+.v-input__slot {
+  border-radius: 12px !important;
+}

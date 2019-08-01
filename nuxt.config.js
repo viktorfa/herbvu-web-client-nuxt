@@ -1,5 +1,6 @@
 import dotenv from "dotenv-safe";
-import { getOffers } from "./static-routes";
+import { getOffers } from "./build/static-routes";
+import { getLinkTags } from "./build/head";
 import { getAllMetaInfo } from "./src/util/meta-tags";
 dotenv.config();
 
@@ -12,6 +13,7 @@ export default {
   head: {
     ...getAllMetaInfo(),
     link: [
+      ...getLinkTags(),
       { rel: "icon", type: "image/x-icon", href: "/favicon.ico" },
       {
         rel: "stylesheet",

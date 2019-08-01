@@ -44,7 +44,15 @@ export default {
   /*
    ** Nuxt.js modules
    */
-  modules: [],
+  modules: [
+    "@nuxtjs/sitemap",
+    [
+      "@nuxtjs/google-analytics",
+      {
+        id: "UA-132355293-1",
+      },
+    ],
+  ],
   /*
    ** vuetify module configuration
    ** https://github.com/nuxt-community/vuetify-module
@@ -80,6 +88,13 @@ export default {
     ].filter(function(f) {
       return !/\/$/.test(f);
     }),
+  },
+  sitemap: {
+    hostname: "https://allematpriser.no",
+    exclude: ["/sok"],
+    filter({ routes }) {
+      return routes.map(({ route, url: _url }) => ({ url: _url || route }));
+    },
   },
   generate: {
     async routes() {

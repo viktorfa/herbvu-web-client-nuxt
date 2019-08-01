@@ -1,5 +1,5 @@
 import dotenv from "dotenv-safe";
-
+import { getOffers } from "./static-routes";
 dotenv.config();
 
 export default {
@@ -58,6 +58,7 @@ export default {
    */
   vuetify: {
     // customVariables: ["~/assets/variables.scss"],
+    treeShake: false,
   },
   /*
    ** Build configuration
@@ -88,45 +89,14 @@ export default {
     }),
   },
   generate: {
-    routes() {
+    async routes() {
       const prefix = "/tilbud/";
-      return ["shopgun:product:368dONsT", "shopgun:product:6fbbo1QT"].map(
-        (id) => ({
-          route: `${prefix}${id}`,
-          payload: {
-            _id: "5d3d39fbe81a2f9f105658b9",
-            uri: "shopgun:product:21dbkuYT",
-            brand: null,
-            dealer: "Coop Prix",
-            description: "2 varianter. 4 x 125 g. Pr kg 179,80",
-            heading: "Coop laksefilet",
-            href: "https://shopgun.com/publications/paged/2bdbCZF/pages/1",
-            image_url:
-              "https://d3ikkoqs9ddhdl.cloudfront.net/img/offer/crop/zoom/21dbkuYT.jpg?m=0",
-            piece_value: null,
-            pieces: { from: 4, to: 4 },
-            pricing: { price: 89.9, pre_price: null, currency: "NOK" },
-            provenance: "shopgun",
-            provenance_id: "21dbkuYT",
-            quantity: {
-              unit: {
-                symbol: "g",
-                type: "quantity",
-                si: { symbol: "kg", factor: 0.001 },
-              },
-              size: { min: 500, max: 500 },
-              pieces: { min: null, max: null },
-            },
-            quantity_value: null,
-            run_from: "2019-07-21T22:00:00.000Z",
-            run_till: "2019-08-04T21:59:59.000Z",
-            size: { from: 125, to: 125 },
-            unit: { symbol: "g", si: { symbol: "kg", factor: 0.001 } },
-            is_offer: true,
-            score: 1.5,
-          },
-        }),
-      );
+      const offers = await getOffers();
+      console.info(`Generating ${offers.length} product pages.`);
+      return offers.map((offer) => ({
+        route: `${prefix}${offer.uri}`,
+        payload: offer,
+      }));
     },
   },
 };

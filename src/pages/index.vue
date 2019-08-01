@@ -23,19 +23,19 @@ export default {
     PromotedProducts,
     ProductListBanner,
   },
-  mounted() {
-    this.$store.dispatch("UPDATE_PROMOTED_PRODUCTS");
+  computed: {
+    ...mapState(["promotedProducts", "isLoadingPromotedProducts"]),
   },
   async fetch({ store }) {
     if (process.server) {
       await store.dispatch("LOAD_PROMOTED_PRODUCTS");
     }
   },
+  mounted() {
+    this.$store.dispatch("UPDATE_PROMOTED_PRODUCTS");
+  },
   metaInfo: {
     ...getAllMetaInfo(),
-  },
-  computed: {
-    ...mapState(["promotedProducts", "isLoadingPromotedProducts"]),
   },
 };
 </script>

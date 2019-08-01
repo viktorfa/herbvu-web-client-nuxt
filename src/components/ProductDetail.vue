@@ -2,7 +2,7 @@
   <v-card text>
     <h1 class="text-3xl text-center w-full">{{product.title}}</h1>
     <v-img :src="product.image_url" aspect-ratio="2.4" contain :alt="product.title"></v-img>
-    <p class="text-red-500 text-lg" v-if="offerExpired">Dette tilbudet er dessverre utgått.</p>
+    <p v-if="offerExpired" class="text-red-500 text-lg">Dette tilbudet er dessverre utgått.</p>
     <div class="flex flex-col items-center">
       <h3 class="headline mb-0">{{ formatPrice(product.price) }}</h3>
       <div>{{ product.description }}</div>
@@ -29,7 +29,7 @@
 
 <script>
 import ProductShareDialog from "~/components/ProductShareDialog";
-import { getStandardProduct, formatPrice } from "~/util/lib";
+import { formatPrice } from "~/util/lib";
 import { getDealerLogoSrc } from "~/util/helpers";
 
 export default {

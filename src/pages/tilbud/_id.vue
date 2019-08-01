@@ -12,7 +12,7 @@
         <nuxt-link to="/" replace>Tilbake</nuxt-link>
       </div>
     </div>
-    <div class="text-xs-center" v-show="!isLoadingDetailProduct" v-if="product">
+    <div v-show="!isLoadingDetailProduct" v-if="product" class="text-xs-center">
       <div class="flex justify-center">
         <div class="w-full max-w-4xl">
           <ProductDetail :product="product" />
@@ -80,24 +80,12 @@ export default {
       return this.$route.params.id;
     },
   },
-  methods: {
-    handleClickMenu() {
-      this.$router.go(-1);
-    },
-  },
   watch: {
     product() {
       this.$store.dispatch("LOAD_SIMILAR_PRODUCTS", {
         product: this.detailProduct,
       });
     },
-  },
-  mounted() {
-    if (this.detailProduct) {
-      this.$store.dispatch("LOAD_SIMILAR_PRODUCTS", {
-        product: this.detailProduct,
-      });
-    }
   },
   async fetch({ store, params, payload }) {
     // We don't use await on client, as that makes the page transition faster.
@@ -106,15 +94,25 @@ export default {
       store.dispatch("LOAD_DETAIL_PRODUCT", {
         id: params.id,
       });
-    } else {
-      if (payload) {
+    } else if (payload) {
         store.commit("setDetailProduct", payload);
       } else {
         await store.dispatch("LOAD_DETAIL_PRODUCT", {
           id: params.id,
         });
       }
+  },
+  mounted() {
+    if (this.detailProduct) {
+      this.$store.dispatch("LOAD_SIMILAR_PRODUCTS", {
+        product: this.detailProduct,
+      });
     }
+  },
+  methods: {
+    handleClickMenu() {
+      this.$router.go(-1);
+    },
   },
 };
 </script>

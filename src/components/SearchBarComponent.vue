@@ -52,20 +52,6 @@ export default {
       return getHints(this.searchInput, this.autocompleteData);
     },
   },
-  async mounted() {
-    const { data, error } = await getAutocompleteData();
-    if (data) {
-      const autocompleteData = {
-        tokens: data.heading_tokens,
-        bigrams: data.heading_bigrams,
-        fullgrams: data.heading_fullgrams,
-      };
-      this.autocompleteData = autocompleteData;
-    } else {
-      console.warn("Could not load autocomplete data");
-      console.error(error);
-    }
-  },
   watch: {
     /** Focus input if search result is empty. */
     searchResults(newValue) {
@@ -101,6 +87,20 @@ export default {
         this.$refs.searchInput.blur();
       }
     },
+  },
+  async mounted() {
+    const { data, error } = await getAutocompleteData();
+    if (data) {
+      const autocompleteData = {
+        tokens: data.heading_tokens,
+        bigrams: data.heading_bigrams,
+        fullgrams: data.heading_fullgrams,
+      };
+      this.autocompleteData = autocompleteData;
+    } else {
+      console.warn("Could not load autocomplete data");
+      console.error(error);
+    }
   },
 };
 </script>

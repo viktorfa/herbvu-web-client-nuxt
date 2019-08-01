@@ -2,7 +2,7 @@
   <div class="result-list-item flex flex-col text-center">
     <nuxt-link :to="`/tilbud/${id}`" class="search-result-link flex flex-col justify-between">
       <div>
-        <div v-lazyload v-if="showDealerLogo && dealerLogoSrc">
+        <div v-if="showDealerLogo && dealerLogoSrc" v-lazyload>
           <img class="dealer-logo-image" :data-url="dealerLogoSrc" :alt="dealer" />
         </div>
         <div v-else-if="showDealerLogo" class="font-semibold">{{dealer}}</div>
@@ -41,6 +41,11 @@ export default {
     showDealerLogo: { type: Boolean, default: true },
     showSubtitle: { type: Boolean, default: true },
   },
+  data() {
+    return {
+      formattedPrice: formatPrice(this.price),
+    };
+  },
   computed: {
     dealerLogoSrc() {
       if (this.showDealerLogo) {
@@ -59,11 +64,6 @@ export default {
       }
       return this.subtitle;
     },
-  },
-  data: function() {
-    return {
-      formattedPrice: formatPrice(this.price),
-    };
   },
 };
 </script>

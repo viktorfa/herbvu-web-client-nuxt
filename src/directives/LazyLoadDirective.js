@@ -32,7 +32,7 @@ export default {
       const observer = new IntersectionObserver(handleIntersect, options);
       observer.observe(el);
     }
-    if (window["IntersectionObserver"]) {
+    if (window.IntersectionObserver) {
       createObserver();
     } else {
       loadImage();

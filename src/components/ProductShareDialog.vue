@@ -1,11 +1,11 @@
 <template>
-  <ShareDialog :socialLinkData="socialLinkData" :title="product.title" :url="url" />
+  <ShareDialog :social-link-data="socialLinkData" :title="product.title" :url="url" />
 </template>
 
 <script>
-import ShareDialog from "./ShareDialog";
 import { getSocialLinkDataForProduct } from "../util/sharing";
 import { getAmpShareUrlForProduct } from "../util/helpers";
+import ShareDialog from "./ShareDialog";
 export default {
   name: "ProductShareDialog",
   components: {

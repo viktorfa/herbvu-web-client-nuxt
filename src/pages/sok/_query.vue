@@ -57,6 +57,13 @@ export default {
       this.handleNewQuery(newQuery);
     },
   },
+  created() {
+    this.$store.commit("setIsSearching", true);
+  },
+  mounted() {
+    console.log("Search mounted");
+    this.handleNewQuery(this.queryString);
+  },
   methods: {
     handleNewQuery(newQuery) {
       if (
@@ -70,13 +77,6 @@ export default {
         });
       }
     },
-  },
-  created() {
-    this.$store.commit("setIsSearching", true);
-  },
-  mounted() {
-    console.log("Search mounted");
-    this.handleNewQuery(this.queryString);
   },
 };
 </script>

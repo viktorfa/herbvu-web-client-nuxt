@@ -2,7 +2,7 @@
   <div>
     <div v-if="offers.length > 0" class="offer-search-results">
       <ProductListBanner class="bg-amp-purple text-white">{{ offers.length }} tilbud</ProductListBanner>
-      <ProductList :products="offers" :showSubtitle="false" />
+      <ProductList :products="offers" :show-subtitle="false" />
       <br />
     </div>
     <div v-if="kolonialProducts.length > 0" class="kolonial-search-results">
@@ -11,7 +11,7 @@
         {{ `${kolonialProducts.length > 1 ? "varer" : "vare"}` }} fra
         kolonial.no
       </ProductListBanner>
-      <ProductList :products="kolonialProducts" :showDealerLogo="false" />
+      <ProductList :products="kolonialProducts" :show-dealer-logo="false" />
     </div>
     <div v-if="menyProducts.length > 0" class="meny-search-results">
       <ProductListBanner class="bg-meny-red text-white">
@@ -19,7 +19,7 @@
         {{ `${menyProducts.length > 1 ? "varer" : "vare"}` }} fra
         meny.no
       </ProductListBanner>
-      <ProductList :products="menyProducts" :showDealerLogo="false" />
+      <ProductList :products="menyProducts" :show-dealer-logo="false" />
     </div>
     <div v-if="europrisProducts.length > 0" class="europris-search-results">
       <ProductListBanner class="bg-europris-green text-white">
@@ -27,16 +27,16 @@
         {{ `${europrisProducts.length > 1 ? "varer" : "vare"}` }} fra
         europris.no
       </ProductListBanner>
-      <ProductList :products="europrisProducts" :showDealerLogo="false" />
+      <ProductList :products="europrisProducts" :show-dealer-logo="false" />
     </div>
   </div>
 </template>
 
 <script>
 import sortBy from "lodash/sortBy";
+import { getStandardProduct } from "../util/lib";
 import ProductList from "./ProductList";
 import ProductListBanner from "./ProductListBanner.vue";
-import { getStandardProduct } from "../util/lib";
 
 const isOffer = (result) =>
   result.provenance === "shopgun" || result.provenance === "custom";
@@ -55,12 +55,12 @@ export default {
     results: Array,
   },
   computed: {
-    offers: function() {
+    offers() {
       return (
         sortResults(this.results.filter(isOffer)).map(getStandardProduct) || []
       );
     },
-    kolonialProducts: function() {
+    kolonialProducts() {
       console.log("kolonial computed starting");
       const startTime = new Date().getTime();
       const result =
@@ -70,7 +70,7 @@ export default {
       console.log(`time elapsed: ${new Date().getTime() - startTime}`);
       return result;
     },
-    menyProducts: function() {
+    menyProducts() {
       console.log("meny computed starting");
       const startTime = new Date().getTime();
       const result =
@@ -79,7 +79,7 @@ export default {
       console.log(`time elapsed: ${new Date().getTime() - startTime}`);
       return result;
     },
-    europrisProducts: function() {
+    europrisProducts() {
       return (
         sortResults(this.results.filter(isEuropris)).map(getStandardProduct) ||
         []

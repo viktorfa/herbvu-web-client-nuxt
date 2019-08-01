@@ -3,16 +3,10 @@
 </template>
 
 <script>
-import { mapState } from "vuex";
-
 import { getAllMetaInfo } from "~/util/meta-tags";
-import SearchResults from "~/components/SearchResults.vue";
 
 export default {
   name: "Search",
-  components: {
-    SearchResults,
-  },
   head() {
     return getAllMetaInfo();
   },

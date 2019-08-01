@@ -8,28 +8,28 @@
     <v-card class="flex flex-col items-center text-center">
       <div class="text-2xl my-2">{{title}}</div>
       <input
+        :id="`${_uid}share-url-input`"
         class="w-full text-center"
         readonly
         type="text"
         :value="url"
-        :id="`${_uid}share-url-input`"
       />
       <v-card-actions class="flex justify-center">
         <v-btn large icon @click="handleClickCopy">
           <v-icon size="xx-large" color="grey">mdi-content-copy</v-icon>
         </v-btn>
         <v-btn
-          large
-          icon
           v-for="({ icon, href, color }) in _socialLinkData"
           :key="icon"
+          large
+          icon
           :href="href"
         >
           <v-icon size="xx-large" :color="color">{{icon}}</v-icon>
         </v-btn>
       </v-card-actions>
-      <div class="text-uppercase text-gray-600" v-show="showCopySuccessMessage">Kopiert</div>
-      <div style="visibility: hidden;" v-show="!showCopySuccessMessage">_</div>
+      <div v-show="showCopySuccessMessage" class="text-uppercase text-gray-600">Kopiert</div>
+      <div v-show="!showCopySuccessMessage" style="visibility: hidden;">_</div>
     </v-card>
   </v-dialog>
 </template>

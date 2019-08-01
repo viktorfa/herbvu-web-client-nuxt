@@ -5,12 +5,12 @@
         <ProductListItem
           :key="product.id"
           v-bind="product"
-          :showDealerLogo="showDealerLogo"
-          :showSubtitle="showSubtitle"
+          :show-dealer-logo="showDealerLogo"
+          :show-subtitle="showSubtitle"
         />
       </template>
     </div>
-    <v-btn @click="showMore" v-if="isMore" color="info" block text>mer</v-btn>
+    <v-btn v-if="isMore" color="info" block text @click="showMore">mer</v-btn>
     <br v-else />
   </div>
 </template>
@@ -45,7 +45,7 @@ export default {
     },
   },
   methods: {
-    showMore: function() {
+    showMore() {
       this.pageNumber += 1;
     },
   },

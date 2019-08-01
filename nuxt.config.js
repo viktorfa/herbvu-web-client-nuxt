@@ -92,9 +92,6 @@ export default {
   sitemap: {
     hostname: "https://allematpriser.no",
     exclude: ["/sok"],
-    filter({ routes }) {
-      return routes.map(({ route, url: _url }) => ({ url: _url || route }));
-    },
   },
   generate: {
     async routes() {
@@ -104,6 +101,7 @@ export default {
       return offers.map((offer) => ({
         route: `${prefix}${offer.uri}`,
         payload: offer,
+        url: `${prefix}${offer.uri}`,
       }));
     },
   },

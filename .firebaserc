@@ -1,0 +1,14 @@
+{
+  "projects": {
+    "default": "grocery-prices"
+  },
+  "targets": {
+    "grocery-prices": {
+      "hosting": {
+        "amp-client-nuxt": [
+          "amp-client-nuxt"
+        ]
+      }
+    }
+  }
+}

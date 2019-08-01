@@ -88,3 +88,6 @@ sw.*
 
 # Mac OSX
 .DS_Store
+
+# Firebase
+.firebase

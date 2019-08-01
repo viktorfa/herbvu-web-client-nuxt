@@ -71,6 +71,9 @@ export default {
       }
     },
   },
+  created() {
+    this.$store.commit("setIsSearching", true);
+  },
   mounted() {
     console.log("Search mounted");
     this.handleNewQuery(this.queryString);

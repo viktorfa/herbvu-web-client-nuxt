@@ -126,6 +126,13 @@ export default {
       });
     },
   },
+  mounted() {
+    if (this.detailProduct) {
+      this.$store.dispatch("LOAD_SIMILAR_PRODUCTS", {
+        product: this.detailProduct,
+      });
+    }
+  },
   async fetch({ store, params, payload }) {
     // We don't use await on client, as that makes the page transition faster.
     // On SSR, we need the product to be fetched for SEO.

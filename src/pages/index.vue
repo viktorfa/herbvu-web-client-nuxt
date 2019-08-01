@@ -23,7 +23,7 @@ export default {
     ProductListLoading,
     ProductListBanner,
   },
-  created() {
+  mounted() {
     this.$store.dispatch("LOAD_PROMOTED_PRODUCTS");
   },
   metaInfo: {

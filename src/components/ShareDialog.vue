@@ -5,7 +5,7 @@
         <v-btn outlined text color="orange" v-on="on">Del</v-btn>
       </slot>
     </template>
-    <v-card class="flex flex-col items-center">
+    <v-card class="flex flex-col items-center text-center">
       <div class="text-2xl my-2">{{title}}</div>
       <input
         class="w-full text-center"

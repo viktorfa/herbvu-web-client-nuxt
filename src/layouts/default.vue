@@ -2,11 +2,16 @@
   <v-app class="v-application">
     <v-content class="container mx-auto">
       <NavigationDrawer />
-      <SearchBarComponent>
-        <template v-slot:prepend-inner>
-          <TopMenuButton />
+      <no-ssr placeholder>
+        <template v-slot:placeholder>
+          <div class="search-bar-placeholder"></div>
         </template>
-      </SearchBarComponent>
+        <SearchBarComponent>
+          <template v-slot:prepend-inner>
+            <TopMenuButton />
+          </template>
+        </SearchBarComponent>
+      </no-ssr>
       <div class="mx-1 sm:mx-0">
         <nuxt />
       </div>
@@ -49,3 +54,10 @@ export default {
   },
 };
 </script>
+
+<style>
+.search-bar-placeholder {
+  height: calc(86px + 0.3rem);
+  visibility: hidden;
+}
+</style>

@@ -11,6 +11,7 @@ import { isProductUri } from "~/util/helpers";
 export const productActions = {
   EXECUTE_SEARCH_QUERY: "EXECUTE_SEARCH_QUERY",
   LOAD_PROMOTED_PRODUCTS: "LOAD_PROMOTED_PRODUCTS",
+  UPDATE_PROMOTED_PRODUCTS: "UPDATE_PROMOTED_PRODUCTS",
   LOAD_DETAIL_PRODUCT: "LOAD_DETAIL_PRODUCT",
   LOAD_SIMILAR_PRODUCTS: "LOAD_SIMILAR_PRODUCTS",
 };
@@ -28,8 +29,23 @@ export const actions = {
     } else {
       commit(productMutations.setErrorMessage, error);
     }
-    commit(productMutations.setIsLoadingPromotedProducts, false);
     console.log("LOAD_PROMOTED_PRODUCTS finish");
+  },
+  async [productActions.UPDATE_PROMOTED_PRODUCTS]({ commit }) {
+    console.log("UPDATE_PROMOTED_PRODUCTS");
+    commit(productMutations.setIsLoadingPromotedProducts, true);
+    const { ok, data, error } = await getPromotedOffers();
+    if (ok) {
+      const filteredProducts = uniqBy(
+        data,
+        (offer) => offer.heading + offer.dealer + offer.pricing.price,
+      );
+      commit(productMutations.loadPromotedProducts, filteredProducts);
+    } else {
+      commit(productMutations.setErrorMessage, error);
+    }
+    commit(productMutations.setIsLoadingPromotedProducts, false);
+    console.log("UPDATE_PROMOTED_PRODUCTS finish");
   },
   async [productActions.EXECUTE_SEARCH_QUERY]({ commit }, { queryString }) {
     commit(productMutations.setIsSearching, true);

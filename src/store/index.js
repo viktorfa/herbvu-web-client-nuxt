@@ -11,7 +11,6 @@ const initialState = {
   isLoadingDetailProduct: false,
   searchResults: [],
   similarProducts: [],
-  showPromotedProducts: true,
   errorMessage: "",
   showDrawer: false,
   detailProduct: null,

@@ -12,7 +12,6 @@ export const productMutations = {
   setIsLoading: "setIsLoading",
   setIsLoadingPromotedProducts: "setIsLoadingPromotedProducts",
   setIsLoadingDetailProduct: "setIsLoadingDetailProduct",
-  setShowPromotedProducts: "setShowPromotedProducts",
   loadSearchResults: "loadSearchResults",
   clearSearchResults: "clearSearchResults",
   loadPromotedProducts: "loadPromotedProducts",
@@ -44,9 +43,6 @@ export const mutations = {
   },
   [productMutations.setIsLoading](state, isLoading) {
     state.isLoading = isLoading;
-  },
-  [productMutations.setShowPromotedProducts](state, showPromotedProducts) {
-    state.showPromotedProducts = showPromotedProducts;
   },
   [productMutations.clearSearchResults](state) {
     state.searchResults = [];

@@ -12,57 +12,57 @@ const defaults = {
 
 export const imageTags = [
   {
-    key: "image",
+    hid: "image",
     name: "image",
   },
   {
-    key: "schema:image",
+    hid: "schema:image",
     itemprop: "image",
   },
   {
-    key: "twitter:image",
+    hid: "twitter:image",
     name: "twitter:image:src",
   },
   {
-    key: "og:image",
+    hid: "og:image",
     property: "og:image",
   },
 ];
 export const titleTags = [
   {
-    key: "schema:name",
+    hid: "schema:name",
     itemprop: "name",
   },
   {
-    key: "twitter:title",
+    hid: "twitter:title",
     name: "twitter:title",
   },
   {
-    key: "og:title",
+    hid: "og:title",
     property: "og:title",
   },
 ];
 export const descriptionTags = [
   {
-    key: "description",
+    hid: "description",
     name: "description",
   },
   {
-    key: "schema:description",
+    hid: "schema:description",
     itemprop: "description",
   },
   {
-    key: "twitter:description",
+    hid: "twitter:description",
     name: "twitter:card",
   },
   {
-    key: "og:description",
+    hid: "og:description",
     property: "og:description",
   },
 ];
 export const urlTags = [
   {
-    key: "og:url",
+    hid: "og:url",
     property: "og:url",
   },
 ];
@@ -85,17 +85,17 @@ export const getAllMetaTags = ({ title, description, image_url, site_url }) => {
       content: site_url,
     })),
     {
-      key: "twitter:card",
+      hid: "twitter:card",
       name: "twitter:card",
       content: "summary",
     },
     {
-      key: "og:locale",
+      hid: "og:locale",
       property: "og:locale",
       content: "nb_NO",
     },
     {
-      key: "og:type",
+      hid: "og:type",
       property: "og:type",
       content: "website",
     },
@@ -132,7 +132,6 @@ export const getAllMetaInfo = ({
   return {
     title,
     titleTemplate: "%s – allematpriser.no",
-    description,
     meta: getAllMetaTags({
       title,
       description,

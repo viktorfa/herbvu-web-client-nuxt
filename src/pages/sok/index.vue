@@ -13,10 +13,8 @@ export default {
   components: {
     SearchResults,
   },
-  metaInfo() {
-    return getAllMetaInfo({
-      title: this.searchQuery ? `Tilbud på "${this.searchQuery}"` : undefined,
-    });
+  head() {
+    return getAllMetaInfo();
   },
 };
 </script>

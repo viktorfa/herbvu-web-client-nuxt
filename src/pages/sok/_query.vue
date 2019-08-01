@@ -28,7 +28,7 @@ export default {
   components: {
     SearchResults,
   },
-  metaInfo() {
+  head() {
     return getAllMetaInfo({
       title: this.searchQuery ? `Tilbud på "${this.searchQuery}"` : undefined,
     });

@@ -73,7 +73,7 @@ export default {
     ProductList,
     ProductShareDialog,
   },
-  metaInfo() {
+  head() {
     if (this.product) {
       const metaInfo = getAllMetaInfoForProduct(this.product);
       return { ...metaInfo, titleTemplate: "%s - allematpriser.no" };

@@ -9,7 +9,7 @@
     >
       <p>Fant ikke tilbud. Mulig varen ikke finnes lenger.</p>
       <p>
-        <router-link to="/" replace>Tilbake</router-link>
+        <nuxt-link to="/" replace>Tilbake</nuxt-link>
       </p>
     </div>
     <div class="text-xs-center" v-show="!isLoadingDetailProduct" v-if="product">

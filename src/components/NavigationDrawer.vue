@@ -3,7 +3,7 @@
     <div class="flex flex-col justify-between h-full">
       <v-list dense>
         <v-list-item>
-          <router-link to="/" class="w-full flex">
+          <nuxt-link to="/" class="w-full flex">
             <v-list-item-avatar>
               <img src="/logo-256x256.png" />
             </v-list-item-avatar>
@@ -12,7 +12,7 @@
                 <span class="text-lg">allematpriser.no</span>
               </v-list-item-title>
             </v-list-item-content>
-          </router-link>
+          </nuxt-link>
         </v-list-item>
         <v-divider />
         <v-list-item>

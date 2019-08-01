@@ -74,6 +74,7 @@ export const getStandardProduct = (product) => {
         href: "#",
         image_url: product.image_url,
         id: product.uri || product._id,
+        runTill: product.run_till,
       };
     default:
       return {
@@ -86,6 +87,7 @@ export const getStandardProduct = (product) => {
         image_url: product.image_url,
         id: product.uri,
         value: getProductValue(product),
+        runTill: product.run_till,
       };
   }
 };

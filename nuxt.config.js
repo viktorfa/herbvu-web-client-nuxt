@@ -45,7 +45,13 @@ export default {
    ** Nuxt.js modules
    */
   modules: [
-    "@nuxtjs/sitemap",
+    [
+      "@nuxtjs/sitemap",
+      {
+        hostname: "https://allematpriser.no",
+        exclude: ["/sok"],
+      },
+    ],
     [
       "@nuxtjs/google-analytics",
       {
@@ -71,6 +77,10 @@ export default {
     extend(config, ctx) {},
   },
   purgeCSS: {
+    enabled: true,
+    // Adding all these Vuetify classes bloates our css a lot.
+    // Should replace add Vuetify theme CSS to our own css files so save
+    // some 40kb in the CSS bundle.
     whitelistPatterns: [/^v-/, /^theme--/, /--text$/],
     extractors: [
       {
@@ -81,17 +91,7 @@ export default {
         },
       },
     ],
-    content: [
-      "./**/*.vue",
-      "./**/*.html",
-      "./node_modules/vuetify/src/**/*.js",
-    ].filter(function(f) {
-      return !/\/$/.test(f);
-    }),
-  },
-  sitemap: {
-    hostname: "https://allematpriser.no",
-    exclude: ["/sok"],
+    content: ["./src/**/*.vue", "./src/**/*.html"],
   },
   generate: {
     async routes() {

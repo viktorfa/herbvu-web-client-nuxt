@@ -57,6 +57,9 @@ export default {
       return getAllMetaInfo();
     }
   },
+  data() {
+    return { staticDetailProduct: null };
+  },
   computed: {
     ...mapState([
       "detailProduct",
@@ -73,6 +76,8 @@ export default {
     product() {
       if (this.detailProduct) {
         return getStandardProduct(this.detailProduct);
+      } else if (this.staticDetailProduct) {
+        return getStandardProduct(this.staticDetailProduct);
       }
       return null;
     },
@@ -87,7 +92,7 @@ export default {
       });
     },
   },
-  async fetch({ store, params, payload }) {
+  async asyncData({ store, params, payload }) {
     // We don't use await on client, as that makes the page transition faster.
     // On SSR, we need the product to be fetched for SEO.
     if (process.client) {
@@ -95,17 +100,19 @@ export default {
         id: params.id,
       });
     } else if (payload) {
-        store.commit("setDetailProduct", payload);
-      } else {
-        await store.dispatch("LOAD_DETAIL_PRODUCT", {
-          id: params.id,
-        });
-      }
+      return {
+        staticDetailProduct: payload,
+      };
+    } else {
+      await store.dispatch("LOAD_DETAIL_PRODUCT", {
+        id: params.id,
+      });
+    }
   },
   mounted() {
-    if (this.detailProduct) {
+    if (this.detailProduct || this.staticDetailProduct) {
       this.$store.dispatch("LOAD_SIMILAR_PRODUCTS", {
-        product: this.detailProduct,
+        product: this.detailProduct || this.staticDetailProduct,
       });
     }
   },

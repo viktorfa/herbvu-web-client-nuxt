@@ -59,4 +59,4 @@ export const shopgunOfferToAmpOffer = (shopgunOffer) => {
 };
 
 export const getAmpShareUrlForProduct = ({ id }) =>
-  `https://del.allematpriser.no/tilbud/${id}`;
+  `https://allematpriser.no/tilbud/${id}`;

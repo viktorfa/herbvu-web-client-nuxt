@@ -1,6 +1,6 @@
 <template>
-  <v-app class="v-application">
-    <v-content class="container mx-auto">
+  <v-app>
+    <div class="container mx-auto">
       <NavigationDrawer />
       <no-ssr placeholder>
         <template v-slot:placeholder>
@@ -15,7 +15,7 @@
       <div class="mx-1 sm:mx-0">
         <nuxt />
       </div>
-    </v-content>
+    </div>
   </v-app>
 </template>
 
@@ -28,29 +28,6 @@ export default {
     SearchBarComponent,
     TopMenuButton,
     NavigationDrawer,
-  },
-  data() {
-    return {
-      clipped: false,
-      drawer: false,
-      fixed: false,
-      items: [
-        {
-          icon: "mdi-apps",
-          title: "Welcome",
-          to: "/",
-        },
-        {
-          icon: "mdi-chart-bubble",
-          title: "Inspire",
-          to: "/inspire",
-        },
-      ],
-      miniVariant: false,
-      right: true,
-      rightDrawer: false,
-      title: "Vuetify.js",
-    };
   },
 };
 </script>

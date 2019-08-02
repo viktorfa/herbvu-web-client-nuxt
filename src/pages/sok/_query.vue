@@ -45,7 +45,6 @@ export default {
   watch: {
     searchQuery(newValue) {
       if (window.ga && newValue && newValue.length && newValue.length > 0) {
-        console.log(`Sending GA search event.`);
         window.ga("gtag_UA_132355293_1.send", "event", {
           eventCategory: "interaction",
           eventAction: "search",
@@ -61,7 +60,7 @@ export default {
     this.$store.commit("setIsSearching", true);
   },
   mounted() {
-    console.log("Search mounted");
+    this.$store.commit("setIsSearching", false);
     this.handleNewQuery(this.queryString);
   },
   methods: {

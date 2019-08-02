@@ -4,6 +4,8 @@ import { getLinkTags } from "./build/head";
 import { getAllMetaInfo } from "./src/util/meta-tags";
 dotenv.config();
 
+const { meta, title } = getAllMetaInfo();
+
 export default {
   mode: "universal",
   srcDir: "src",
@@ -11,7 +13,13 @@ export default {
    ** Headers of the page
    */
   head: {
-    ...getAllMetaInfo(),
+    title,
+    htmlAttrs: [{ lang: "no" }],
+    meta: [
+      ...meta,
+      { charset: "utf-8" },
+      { name: "viewport", content: "width=device-width", "initial-scale": "1" },
+    ],
     link: [
       ...getLinkTags(),
       { rel: "icon", type: "image/x-icon", href: "/favicon.ico" },
@@ -65,7 +73,7 @@ export default {
    */
   vuetify: {
     // customVariables: ["~/assets/variables.scss"],
-    treeShake: false,
+    // treeShake: false,
   },
   /*
    ** Build configuration
@@ -77,7 +85,6 @@ export default {
     extend(config, ctx) {},
   },
   purgeCSS: {
-    enabled: true,
     // Adding all these Vuetify classes bloates our css a lot.
     // Should replace add Vuetify theme CSS to our own css files so save
     // some 40kb in the CSS bundle.

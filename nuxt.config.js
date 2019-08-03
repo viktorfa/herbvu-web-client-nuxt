@@ -14,11 +14,11 @@ export default {
    */
   head: {
     title,
-    htmlAttrs: [{ lang: "no" }],
+    htmlAttrs: {lang: "no"},
     meta: [
       ...meta,
       { charset: "utf-8" },
-      { name: "viewport", content: "width=device-width", "initial-scale": "1" },
+      { name: "viewport", content: "width=device-width,initial-scale=1" },
     ],
     link: [
       ...getLinkTags(),
@@ -83,6 +83,21 @@ export default {
      ** You can extend webpack config here
      */
     extend(config, ctx) {},
+    // We instead minify with golang which is magnitudes faster
+    html: {
+      minify: {
+        collapseBooleanAttributes: false,
+        decodeEntities: false,
+        minifyCSS: false,
+        minifyJS: false,
+        processConditionalComments: false,
+        removeEmptyAttributes: false,
+        removeRedundantAttributes: false,
+        trimCustomFragments: false,
+        useShortDoctype: false,
+      },
+    },
+    optimization: { minimize: false },
   },
   purgeCSS: {
     // Adding all these Vuetify classes bloates our css a lot.

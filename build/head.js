@@ -5,7 +5,5 @@ const dnsPreconnectDomains = [
 ];
 
 export const getLinkTags = () => {
-  return [
-    dnsPreconnectDomains.map((host) => ({ rel: "dns-preconnect", href: host })),
-  ];
+  return dnsPreconnectDomains.map((host) => ({ rel: "dns-preconnect", href: host }));
 };

@@ -1,0 +1,39 @@
+image: golang:1.12.9
+
+variables:
+  DOCKER_DRIVER: overlay2 # supposed to speed up things (https://blog.sparksuite.com/7-ways-to-speed-up-gitlab-ci-cd-times-29f60aab69f9)
+  NUXT_ENV_COMMIT_SHA: $CI_COMMIT_SHA
+
+stages:
+  - build
+  - deploy
+
+build:
+  stage: build
+  artifacts:
+    paths:
+      - dist/
+      - node_modules/
+  before_script:
+    # Install Node and Yarn
+    - curl -sL https://deb.nodesource.com/setup_10.x | bash -
+    - apt-get install -y nodejs
+    - npm install yarn -g
+    # Install Go minify
+    - go get github.com/tdewolff/minify/cmd/minify
+  script:
+    - yarn install
+    - yarn generate
+    - $GOPATH/bin/minify -r -o dist/ dist
+
+deploy:
+  stage: deploy
+  dependencies:
+    - build
+  before_script:
+    - curl -sL https://deb.nodesource.com/setup_10.x | bash -
+    - apt-get install -y nodejs
+    - npm install -g firebase-tools
+  script:
+    - firebase use --token $FIREBASE_TOKEN
+    - firebase deploy --token $FIREBASE_TOKEN --non-interactive

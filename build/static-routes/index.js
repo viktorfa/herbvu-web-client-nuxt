@@ -1,6 +1,6 @@
 import { getCollection } from "./mongo";
 
-export const getOffers = async (limit = 2 ** 4) => {
+export const getOffers = async (limit = 2 ** 16) => {
   const now = new Date();
   const collection = await getCollection("groceryoffer");
   return collection

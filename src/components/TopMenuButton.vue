@@ -1,5 +1,5 @@
 <template>
-  <v-btn icon @click.stop="handleClickButton">
+  <v-btn icon :aria-label="name" @click.stop="handleClickButton">
     <v-icon>{{icon}}</v-icon>
   </v-btn>
 </template>
@@ -14,6 +14,13 @@ export default {
         return "arrow_back";
       }
       return "menu";
+    },
+    name() {
+      const { path } = this.$route;
+      if (path.startsWith("/tilbud/")) {
+        return "Tilbake";
+      }
+      return "Åpne meny";
     },
   },
   methods: {

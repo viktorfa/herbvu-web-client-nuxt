@@ -1,10 +1,10 @@
 <template>
-  <ProductList :products="_products" :show-subtitle="false" :page-size="16" />
+  <ProductList :products="this._products" :showSubtitle="false" :pageSize="16" />
 </template>
 
 <script>
-import { getStandardProduct } from "../util/lib";
 import ProductList from "./ProductList";
+import { getStandardProduct } from "~/util/products/convert";
 
 export default {
   name: "PromotedProducts",
@@ -15,7 +15,7 @@ export default {
     products: Array,
   },
   computed: {
-    _products() {
+    _products: function() {
       return this.products.map(getStandardProduct).filter(
         // unique by id
         ({ id }, index, arr) =>

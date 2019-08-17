@@ -2,40 +2,41 @@
   <v-dialog v-model="dialog">
     <template v-slot:activator="{ on }">
       <slot name="activator">
-        <v-btn outlined text color="orange" v-on="on">Del</v-btn>
+        <v-btn outlined text color="blue darken-4" v-on="on">Del</v-btn>
       </slot>
     </template>
-    <v-card class="flex flex-col items-center text-center">
+    <v-card class="flex flex-col items-center">
       <div class="text-2xl my-2">{{title}}</div>
       <input
-        :id="`${_uid}share-url-input`"
         class="w-full text-center"
         readonly
         type="text"
         :value="url"
+        :id="`${_uid}share-url-input`"
       />
       <v-card-actions class="flex justify-center">
-        <v-btn large icon @click="handleClickCopy">
+        <v-btn large icon @click="handleClickCopy" name="Kopier link" aria-label="Kopier link">
           <v-icon size="xx-large" color="grey">mdi-content-copy</v-icon>
         </v-btn>
         <v-btn
-          v-for="({ icon, href, color }) in _socialLinkData"
-          :key="icon"
           large
           icon
+          v-for="({ icon, href, color }) in _socialLinkData"
+          :key="icon"
           :href="href"
         >
           <v-icon size="xx-large" :color="color">{{icon}}</v-icon>
         </v-btn>
       </v-card-actions>
-      <div v-show="showCopySuccessMessage" class="text-uppercase text-gray-600">Kopiert</div>
-      <div v-show="!showCopySuccessMessage" style="visibility: hidden;">_</div>
+      <div class="text-uppercase text-gray-600" v-show="showCopySuccessMessage">Kopiert</div>
+      <div style="visibility: hidden;" v-show="!showCopySuccessMessage">_</div>
     </v-card>
   </v-dialog>
 </template>
 
 <script>
-import { getSocialLinkData } from "../util/sharing";
+import { getSocialLinkData } from "~/util/sharing";
+
 export default {
   name: "ShareDialog",
   props: {
@@ -67,7 +68,11 @@ export default {
       inputElement.contentEditable = true;
       inputElement.readOnly = false;
       const range = document.createRange();
-      range.selectNodeContents(inputElement);
+      if (window.chrome) {
+        range.selectNode(inputElement);
+      } else {
+        range.selectNodeContents(inputElement);
+      }
       const selection = window.getSelection();
       selection.removeAllRanges();
       selection.addRange(range);
@@ -83,6 +88,8 @@ export default {
         setTimeout(() => {
           this.showCopySuccessMessage = false;
         }, 3000);
+      } else {
+        console.warn("Could not copy.");
       }
     },
   },

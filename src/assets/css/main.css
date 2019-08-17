@@ -21,3 +21,7 @@
 .v-input__slot {
   border-radius: 12px !important;
 }
+.v-input__append-inner:last-child {
+  /* Remove the dropdown icon on search bar */
+  display: none !important;
+}

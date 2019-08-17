@@ -1,30 +1,13 @@
 import fetch from "node-fetch";
-import { strapiUrl, apiUrl, shopgunToken } from "../config/vars";
-import { shopgunOfferToAmpOffer } from "../util/helpers";
+
 import { getJsonFetchOption, getFullFileUrl, optionFetch } from "./util";
 import cache from "./cache";
-
-export const getIndex = async () => {
-  const fileName = "product-lunr-index-latest.json";
-  const response = await fetch(getFullFileUrl(fileName));
-  return getJsonFetchOption(response);
-};
+import { shopgunOfferToAmpOffer } from "~/util/products/convert";
+import { strapiUrl, apiUrl, shopgunToken } from "~/config/vars";
 
 export const getAutocompleteData = async () => {
   const fileName = "autocomplete-data-latest.json";
   const response = await fetch(getFullFileUrl(fileName));
-  return getJsonFetchOption(response);
-};
-
-export const getObjects = async () => {
-  const fileName = "product-map-latest.json";
-  const response = await fetch(getFullFileUrl(fileName));
-  return getJsonFetchOption(response);
-};
-
-export const getCustomProduct = async (id) => {
-  const strapiCollectionName = "groceryoffers";
-  const response = await fetch(`${strapiUrl}/${strapiCollectionName}/${id}`);
   return getJsonFetchOption(response);
 };
 
@@ -81,9 +64,19 @@ export const getGroceryOffer = async (uri) => {
 };
 
 export const getPromotedOffers = async (offerLimit = 30) => {
-  const isoNow = new Date().toISOString();
+  const earliestToday = new Date();
+  earliestToday.setUTCMilliseconds(0);
+  earliestToday.setUTCSeconds(0);
+  earliestToday.setUTCMinutes(0);
+  earliestToday.setUTCHours(0);
+  const latestToday = new Date();
+  latestToday.setUTCMilliseconds(999);
+  latestToday.setUTCSeconds(59);
+  latestToday.setUTCMinutes(59);
+  latestToday.setUTCHours(23);
+
   const strapiCollectionName = "groceryoffers";
-  const strapiUrlParameterString = `run_till_gt=${isoNow}&run_from_lt=${isoNow}&_limit=${offerLimit}&_sort=select_method:DESC&is_promoted=true`;
+  const strapiUrlParameterString = `run_till_gt=${earliestToday.toISOString()}&run_from_lt=${latestToday.toISOString()}&_limit=${offerLimit}&_sort=select_method:DESC&is_promoted=true`;
   const response = await fetch(
     `${strapiUrl}/${strapiCollectionName}?${strapiUrlParameterString}`,
   );

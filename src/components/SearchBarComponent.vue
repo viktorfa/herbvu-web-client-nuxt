@@ -25,8 +25,7 @@
 <script>
 import { mapState } from "vuex";
 
-import { getAutocompleteData } from "../api";
-import { getHints } from "../util/autocomplete";
+import { getHints } from "~/util/search/autocomplete";
 
 export default {
   name: "SearchBarComponent",
@@ -39,17 +38,12 @@ export default {
       queryInput: this.$route.params.query || this.$store.state.searchQuery,
       /** The input to the combobox that should only determine hints for autocomplete. Should be local state. */
       searchInput: "",
-      autocompleteData: {
-        tokens: [],
-        bigrams: [],
-        fullgrams: [],
-      },
     };
   },
   computed: {
     ...mapState(["isSearching", "showDrawer", "searchResults"]),
     autocomplete() {
-      return getHints(this.searchInput, this.autocompleteData);
+      return getHints(this.searchInput);
     },
   },
   watch: {
@@ -88,29 +82,11 @@ export default {
       }
     },
   },
-  async mounted() {
-    const { data, error } = await getAutocompleteData();
-    if (data) {
-      const autocompleteData = {
-        tokens: data.heading_tokens,
-        bigrams: data.heading_bigrams,
-        fullgrams: data.heading_fullgrams,
-      };
-      this.autocompleteData = autocompleteData;
-    } else {
-      console.warn("Could not load autocomplete data");
-      console.error(error);
-    }
-  },
 };
 </script>
 
 <style>
 .v-autocomplete__content {
   top: 56px !important; /* Autocomplete for type-ahead covers all screen on mobile so we push it down */
-}
-.v-input__append-inner:last-child {
-  /* Remove the dropdown icon on search bar */
-  display: none;
 }
 </style>

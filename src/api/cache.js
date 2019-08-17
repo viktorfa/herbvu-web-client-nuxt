@@ -5,7 +5,7 @@ class LRU {
   }
 
   get(key) {
-    const item = this.cache.get(key);
+    let item = this.cache.get(key);
     if (item) {
       // refresh key
       this.cache.delete(key);
@@ -18,7 +18,7 @@ class LRU {
     if (this.cache.has(key))
       // refresh key
       this.cache.delete(key);
-    else if (this.cache.size === this.max)
+    else if (this.cache.size == this.max)
       // evict oldest
       this.cache.delete(this._first());
     this.cache.set(key, val);

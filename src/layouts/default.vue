@@ -20,14 +20,18 @@
 </template>
 
 <script>
-import SearchBarComponent from "../components/SearchBarComponent";
 import TopMenuButton from "../components/TopMenuButton";
-import NavigationDrawer from "../components/NavigationDrawer";
 export default {
   components: {
-    SearchBarComponent,
+    SearchBarComponent: () =>
+      import(
+        /* webpackChunkName: "SearchBarComponent" */ "../components/SearchBarComponent.vue"
+      ),
+    NavigationDrawer: () =>
+      import(
+        /* webpackChunkName: "NavigationDrawer" */ "../components/NavigationDrawer.vue"
+      ),
     TopMenuButton,
-    NavigationDrawer,
   },
 };
 </script>

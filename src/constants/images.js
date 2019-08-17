@@ -1,4 +1,4 @@
-import kolonialLogo from "@/assets/kolonial-logo.png";
+import kolonialLogo from "../assets/kolonial-logo.png";
 
 export const dealerLogos = {
   Rusta:

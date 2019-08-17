@@ -1,12 +1,9 @@
 import uniqBy from "lodash/uniqBy";
-import {
-  getPromotedOffers,
-  getCustomProduct,
-  getGroceryOffer,
-  searchGroceryOffers,
-} from "../api";
+
 import { productMutations } from "./_mutations";
-import { isProductUri } from "~/util/helpers";
+import { getPromotedOffers, getGroceryOffer, searchGroceryOffers } from "~/api";
+import { isProductUri } from "~/util/products";
+
 
 export const productActions = {
   EXECUTE_SEARCH_QUERY: "EXECUTE_SEARCH_QUERY",
@@ -25,10 +22,11 @@ export const actions = {
         data,
         (offer) => offer.heading + offer.dealer + offer.pricing.price,
       );
-      commit(productMutations.loadPromotedProducts, filteredProducts);
+      commit(productMutations.setPromotedProducts, filteredProducts);
     } else {
       commit(productMutations.setErrorMessage, error);
     }
+    commit(productMutations.setIsLoadingPromotedProducts, false);
     console.log("LOAD_PROMOTED_PRODUCTS finish");
   },
   async [productActions.UPDATE_PROMOTED_PRODUCTS]({ commit }) {
@@ -39,11 +37,11 @@ export const actions = {
       const filteredProducts = uniqBy(
         data,
         (offer) => offer.heading + offer.dealer + offer.pricing.price,
-      );
-      commit(productMutations.loadPromotedProducts, filteredProducts);
-    } else {
-      commit(productMutations.setErrorMessage, error);
-    }
+        );
+        commit(productMutations.setPromotedProducts, filteredProducts);
+      } else {
+        commit(productMutations.setErrorMessage, error);
+      }
     commit(productMutations.setIsLoadingPromotedProducts, false);
     console.log("UPDATE_PROMOTED_PRODUCTS finish");
   },
@@ -70,33 +68,27 @@ export const actions = {
       const { ok, data, error } = await getGroceryOffer(id);
 
       if (ok) {
-        commit(productMutations.detailProductNotFound, false);
+        commit(productMutations.setDetailProductNotFound, false);
         commit(productMutations.setDetailProduct, data);
       } else {
         console.warn(`Could not fetch product with uri: ${id}`);
-        commit(productMutations.detailProductNotFound, true);
+        commit(productMutations.setDetailProductNotFound, true);
         commit(productMutations.setErrorMessage, error);
       }
       commit(productMutations.setIsLoadingDetailProduct, false);
     } else {
-      // Not product uri, needs to be fetched from Strapi
-      const { ok, data, error } = await getCustomProduct(id);
-      if (ok) {
-        commit(productMutations.setDetailProduct, data);
-      } else {
-        commit(productMutations.setErrorMessage, error);
-      }
+      console.error(`Loading detail product needs an ID.`);
     }
   },
   async [productActions.LOAD_SIMILAR_PRODUCTS]({ commit }, { product }) {
-    commit(productMutations.isLoadingSimilarProducts, true);
+    commit(productMutations.setIsLoadingSimilarProducts, true);
     const { data, error } = await searchGroceryOffers(product.heading);
     if (data) {
-      commit(productMutations.similarProducts, data);
+      commit(productMutations.setSimilarProducts, data);
     } else {
       console.error(error);
       commit(productMutations.setErrorMessage, error);
     }
-    commit(productMutations.isLoadingSimilarProducts, false);
+    commit(productMutations.setIsLoadingSimilarProducts, false);
   },
 };

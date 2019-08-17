@@ -5,64 +5,64 @@ const baseUrl = "https://allematpriser.no";
 const defaults = {
   title: "Finn priser på dagligvarer",
   description:
-    "Se hva som er på tilbud og hva som er vanlig pris på dagligvarer i Norge.",
+    "Vi har oversikt over alle tilbud i tillegg til priser fra 3 nettbutikker. Norges beste fullstendige oversikt over priser på dagligvarer.",
   image_url: `${baseUrl}/logo-512x512.png`,
   site_url: `${baseUrl}/`,
 };
 
 export const imageTags = [
   {
-    hid: "image",
+    key: "image",
     name: "image",
   },
   {
-    hid: "schema:image",
+    key: "schema:image",
     itemprop: "image",
   },
   {
-    hid: "twitter:image",
+    key: "twitter:image",
     name: "twitter:image:src",
   },
   {
-    hid: "og:image",
+    key: "og:image",
     property: "og:image",
   },
 ];
 export const titleTags = [
   {
-    hid: "schema:name",
+    key: "schema:name",
     itemprop: "name",
   },
   {
-    hid: "twitter:title",
+    key: "twitter:title",
     name: "twitter:title",
   },
   {
-    hid: "og:title",
+    key: "og:title",
     property: "og:title",
   },
 ];
 export const descriptionTags = [
   {
-    hid: "description",
+    key: "description",
     name: "description",
   },
   {
-    hid: "schema:description",
+    key: "schema:description",
     itemprop: "description",
   },
   {
-    hid: "twitter:description",
+    key: "twitter:description",
     name: "twitter:card",
   },
   {
-    hid: "og:description",
+    key: "og:description",
     property: "og:description",
   },
 ];
 export const urlTags = [
   {
-    hid: "og:url",
+    key: "og:url",
     property: "og:url",
   },
 ];
@@ -85,17 +85,17 @@ export const getAllMetaTags = ({ title, description, image_url, site_url }) => {
       content: site_url,
     })),
     {
-      hid: "twitter:card",
+      key: "twitter:card",
       name: "twitter:card",
       content: "summary",
     },
     {
-      hid: "og:locale",
+      key: "og:locale",
       property: "og:locale",
       content: "nb_NO",
     },
     {
-      hid: "og:type",
+      key: "og:type",
       property: "og:type",
       content: "website",
     },

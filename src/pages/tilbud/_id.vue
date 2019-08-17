@@ -40,7 +40,7 @@ import { mapState } from "vuex";
 
 import ProductList from "~/components/ProductList";
 import ProductDetail from "~/components/ProductDetail";
-import { getStandardProduct } from "~/util/lib";
+import { getStandardProduct } from "~/util/products/convert";
 import { getAllMetaInfoForProduct, getAllMetaInfo } from "~/util/meta-tags";
 
 export default {

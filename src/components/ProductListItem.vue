@@ -1,8 +1,8 @@
 <template>
   <div class="result-list-item flex flex-col text-center">
-    <nuxt-link :to="`/tilbud/${id}`" class="search-result-link flex flex-col justify-between">
+    <router-link :to="`/tilbud/${id}`" class="search-result-link flex flex-col justify-between">
       <div>
-        <div v-if="showDealerLogo && dealerLogoSrc" v-lazyload>
+        <div v-lazyload v-if="showDealerLogo && dealerLogoSrc">
           <img class="dealer-logo-image" :data-url="dealerLogoSrc" :alt="dealer" />
         </div>
         <div v-else-if="showDealerLogo" class="font-semibold">{{dealer}}</div>
@@ -19,13 +19,12 @@
         <div v-if="value">{{ value }}</div>
         <div v-else :style="{visibility: 'hidden'}">_</div>
       </div>
-    </nuxt-link>
+    </router-link>
   </div>
 </template>
 
 <script>
-import { formatPrice } from "../util/lib";
-import { getDealerLogoSrc } from "../util/helpers";
+import { formatPrice, getDealerLogoSrc } from "~/util/products";
 export default {
   name: "ProductListItem",
   props: {
@@ -40,11 +39,6 @@ export default {
     description: String,
     showDealerLogo: { type: Boolean, default: true },
     showSubtitle: { type: Boolean, default: true },
-  },
-  data() {
-    return {
-      formattedPrice: formatPrice(this.price),
-    };
   },
   computed: {
     dealerLogoSrc() {
@@ -64,6 +58,11 @@ export default {
       }
       return this.subtitle;
     },
+  },
+  data: function() {
+    return {
+      formattedPrice: formatPrice(this.price),
+    };
   },
 };
 </script>

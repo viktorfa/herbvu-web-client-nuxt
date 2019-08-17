@@ -2,11 +2,11 @@
   <div class="flex flex-wrap justify-around">
     <template v-for="(product, index) in _products">
       <ProductListItem
-        :key="index"
         class="loading-product-list-item"
+        :key="index"
         v-bind="product"
-        :show-dealer-logo="showDealerLogo"
-        :show-subtitle="showSubtitle"
+        :showDealerLogo="showDealerLogo"
+        :showSubtitle="showSubtitle"
       />
     </template>
   </div>

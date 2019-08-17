@@ -1,34 +1,3 @@
-import { dealerLogos } from "../constants/images";
-
-const SHOPGUN_URL = "https://shopgun.com";
-
-export const getProductFromSearchResult = (result, objects) => {
-  const product = objects[result.ref];
-  if (product) {
-    return {
-      ...product,
-      id: result.ref,
-      score: result.score,
-    };
-  }
-  console.warn(
-    "getProductFromSearchResult could not find product from search result",
-  );
-  return null;
-};
-
-export const bestOfferToOffer = ([id, offer]) => ({
-  ...offer,
-  score: offer.rebate,
-  source: "shopgun",
-  id,
-});
-
-export const getShopgunOfferCatalogUrl = ({ catalog_id, catalog_page }) =>
-  `${SHOPGUN_URL}/publications/paged/${catalog_id}/pages/${catalog_page}`;
-
-export const isProductUri = (string) => /\w+:product:\w+/gi.test(string);
-
 export const isMobileOrTablet = () => {
   let check = false;
   if (
@@ -43,20 +12,3 @@ export const isMobileOrTablet = () => {
   }
   return check;
 };
-
-export const getDealerLogoSrc = (dealerName) => {
-  return dealerLogos[dealerName];
-};
-
-export const shopgunOfferToAmpOffer = (shopgunOffer) => {
-  return {
-    ...shopgunOffer,
-    image_url: shopgunOffer.images.zoom,
-    href: getShopgunOfferCatalogUrl(shopgunOffer),
-    dealer: shopgunOffer.branding.name,
-    id: `shopgun:product:${shopgunOffer.id}`,
-  };
-};
-
-export const getAmpShareUrlForProduct = ({ id }) =>
-  `https://allematpriser.no/tilbud/${id}`;

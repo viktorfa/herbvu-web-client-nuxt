@@ -3,16 +3,16 @@
     <div class="flex flex-col justify-between h-full">
       <v-list dense>
         <v-list-item>
-          <nuxt-link to="/" class="w-full flex">
+          <router-link to="/" class="w-full flex" title="Hjem">
             <v-list-item-avatar>
-              <img src="/logo-256x256.png" />
+              <img src="/logo-256x256.png" alt="logo" />
             </v-list-item-avatar>
             <v-list-item-content>
               <v-list-item-title>
                 <span class="text-lg">allematpriser.no</span>
               </v-list-item-title>
             </v-list-item-content>
-          </nuxt-link>
+          </router-link>
         </v-list-item>
         <v-divider />
         <v-list-item>
@@ -41,7 +41,7 @@
 </template>
 
 <script>
-import { commitSha } from "../config/vars";
+import { commitSha } from "~/config/vars";
 
 export default {
   name: "NavigationDrawer",

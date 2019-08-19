@@ -1,5 +1,5 @@
 <template>
-  <v-navigation-drawer v-model="showDrawer" fixed clipped app>
+  <v-navigation-drawer absolute temporary v-model="showDrawer">
     <div class="flex flex-col justify-between h-full">
       <v-list dense>
         <v-list-item>

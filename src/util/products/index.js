@@ -63,7 +63,7 @@ export const getDealerLogoSrc = (dealerName) => {
 };
 
 export const getAmpShareUrlForProduct = ({ id }) =>
-  `https://del.allematpriser.no/tilbud/${id}`;
+  `https://allematpriser.no/tilbud/${id}`;
 
 export const getShopgunOfferCatalogUrl = ({ catalog_id, catalog_page }) =>
   `${SHOPGUN_URL}/publications/paged/${catalog_id}/pages/${catalog_page}`;

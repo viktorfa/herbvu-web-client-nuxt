@@ -6,7 +6,7 @@
       </slot>
     </template>
     <v-card class="flex flex-col items-center">
-      <div class="text-2xl my-2">{{title}}</div>
+      <div class="text-2xl my-2 text-center">{{title}}</div>
       <input
         class="w-full text-center"
         readonly

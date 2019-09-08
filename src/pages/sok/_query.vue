@@ -44,8 +44,8 @@ export default {
   },
   watch: {
     searchQuery(newValue) {
-      if (window.ga && newValue && newValue.length && newValue.length > 0) {
-        window.ga("gtag_UA_132355293_1.send", "event", {
+      if (this.$ga && newValue && newValue.length && newValue.length > 0) {
+        this.$ga.event({
           eventCategory: "interaction",
           eventAction: "search",
           eventLabel: newValue,

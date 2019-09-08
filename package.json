@@ -13,14 +13,14 @@
     "generate": "nuxt generate"
   },
   "dependencies": {
+    "@nuxtjs/google-tag-manager": "^2.2.1",
     "lodash": "^4.17.15",
-    "node-fetch": "^2.6.0",
     "nuxt": "^2.8.1"
   },
   "devDependencies": {
-    "@nuxtjs/google-analytics": "^2.2.0",
     "@nuxtjs/eslint-config": "^1.1.2",
     "@nuxtjs/eslint-module": "^1.0.0",
+    "@nuxtjs/google-analytics": "^2.2.0",
     "@nuxtjs/sitemap": "^1.2.0",
     "@nuxtjs/tailwindcss": "^1.1.2",
     "@nuxtjs/vuetify": "^1.2.2",
@@ -34,6 +34,7 @@
     "eslint-plugin-prettier": "^3.1.0",
     "jest": "^24.9.0",
     "mongodb": "^3.3.0",
+    "node-fetch": "^2.6.0",
     "nodemon": "^1.19.1",
     "prettier": "^1.18.2",
     "vue-jest": "^3.0.4"

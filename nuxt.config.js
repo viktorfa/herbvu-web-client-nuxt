@@ -64,6 +64,15 @@ export default {
       "@nuxtjs/google-analytics",
       {
         id: "UA-132355293-1",
+        trackEvent: true,
+      },
+    ],
+    [
+      "@nuxtjs/google-tag-manager",
+      {
+        id: "GTM-WLK7HLS",
+        respectDoNotTrack: true,
+        dev: true,
       },
     ],
   ],

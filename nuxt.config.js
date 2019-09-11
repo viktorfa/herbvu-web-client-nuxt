@@ -14,7 +14,7 @@ export default {
    */
   head: {
     title,
-    htmlAttrs: {lang: "no"},
+    htmlAttrs: { lang: "no" },
     meta: [
       ...meta,
       { charset: "utf-8" },
@@ -44,7 +44,7 @@ export default {
   /*
    ** Nuxt.js dev-modules
    */
-  devModules: [
+  buildModules: [
     // Doc: https://github.com/nuxt-community/eslint-module
     "@nuxtjs/vuetify",
     "@nuxtjs/tailwindcss",

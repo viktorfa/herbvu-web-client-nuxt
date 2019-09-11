@@ -2,7 +2,7 @@
   <v-app>
     <div class="container mx-auto">
       <NavigationDrawer />
-      <no-ssr placeholder>
+      <client-only placeholder>
         <template v-slot:placeholder>
           <div class="search-bar-placeholder"></div>
         </template>
@@ -11,7 +11,7 @@
             <TopMenuButton />
           </template>
         </SearchBarComponent>
-      </no-ssr>
+      </client-only>
       <div class="mx-1 sm:mx-0">
         <nuxt />
       </div>

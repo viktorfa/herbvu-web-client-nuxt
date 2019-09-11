@@ -27,9 +27,9 @@
         target="_blank"
         rel="noopener"
       >Se annonse</v-btn>
-      <no-ssr>
+      <client-only>
         <ProductShareDialog :product="product" />
-      </no-ssr>
+      </client-only>
     </v-card-actions>
   </v-card>
 </template>

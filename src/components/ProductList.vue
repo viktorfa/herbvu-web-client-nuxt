@@ -10,7 +10,14 @@
         />
       </template>
     </div>
-    <v-btn @click="showMore" v-if="isMore" color="blue darken-4" block text>mer</v-btn>
+    <v-btn
+      @click="showMore"
+      v-if="isMore"
+      color="blue darken-4"
+      block
+      text
+      v-enter-viewport="useInfiniteScroll ? showMore : null"
+    >mer</v-btn>
     <br v-else />
   </div>
 </template>
@@ -27,6 +34,7 @@ export default {
     showSubtitle: { type: Boolean, default: true },
     showDealerLogo: { type: Boolean, default: true },
     pageSize: { type: Number, default: 10 },
+    useInfiniteScroll: { type: Boolean, default: true },
   },
   data() {
     return {

@@ -2,7 +2,7 @@
   <div>
     <div v-if="offers.length > 0" class="offer-search-results">
       <ProductListBanner class="bg-amp-purple text-white">{{ offers.length }} tilbud</ProductListBanner>
-      <ProductList :products="offers" :showSubtitle="false" />
+      <ProductList :useInfiniteScroll="false" :products="offers" :showSubtitle="false" />
       <br />
     </div>
     <div v-if="kolonialProducts.length > 0" class="kolonial-search-results">
@@ -11,7 +11,7 @@
         {{ `${kolonialProducts.length > 1 ? "varer" : "vare"}` }} fra
         kolonial.no
       </ProductListBanner>
-      <ProductList :products="kolonialProducts" :showDealerLogo="false" />
+      <ProductList :useInfiniteScroll="false" :products="kolonialProducts" :showDealerLogo="false" />
     </div>
     <div v-if="menyProducts.length > 0" class="meny-search-results">
       <ProductListBanner class="bg-meny-red text-white">
@@ -19,7 +19,7 @@
         {{ `${menyProducts.length > 1 ? "varer" : "vare"}` }} fra
         meny.no
       </ProductListBanner>
-      <ProductList :products="menyProducts" :showDealerLogo="false" />
+      <ProductList :useInfiniteScroll="false" :products="menyProducts" :showDealerLogo="false" />
     </div>
     <div v-if="europrisProducts.length > 0" class="europris-search-results">
       <ProductListBanner class="bg-europris-green text-white">
@@ -27,7 +27,7 @@
         {{ `${europrisProducts.length > 1 ? "varer" : "vare"}` }} fra
         europris.no
       </ProductListBanner>
-      <ProductList :products="europrisProducts" :showDealerLogo="false" />
+      <ProductList :useInfiniteScroll="false" :products="europrisProducts" :showDealerLogo="false" />
     </div>
   </div>
 </template>

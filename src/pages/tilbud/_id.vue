@@ -20,7 +20,7 @@
       </div>
       <h2
         v-show="_similarProducts.length > 0"
-        class="text-2xl m-4 w-full text-center"
+        class="text-2xl m-4 text-center"
       >Lignende varer</h2>
       <div>
         <div v-show="isLoadingSimilarProducts" class="flex align-center justify-center mt-4">

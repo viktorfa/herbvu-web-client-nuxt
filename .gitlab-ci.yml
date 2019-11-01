@@ -19,6 +19,7 @@ build:
     - curl -sL https://deb.nodesource.com/setup_10.x | bash -
     - apt-get install -y nodejs
     - npm install yarn -g
+    - npm install node-gyp -g
     # Install Go minify
     - go get github.com/tdewolff/minify/cmd/minify
   script:

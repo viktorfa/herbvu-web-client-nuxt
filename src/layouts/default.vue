@@ -11,14 +11,12 @@
               <img src="/logo-horizontal.svg" class="h-full mx-auto" alt="Logo" />
             </nuxt-link>
           </div>
-          <div class="flex fluid my-auto justify-between md:ml-4 w-full">
+          <div class="flex my-auto justify-between md:ml-4 w-full">
             <client-only placeholder>
               <template v-slot:placeholder>
                 <div class="search-bar-placeholder"></div>
               </template>
-              <SearchBarComponent>
-                <template v-slot:prepend-inner></template>
-              </SearchBarComponent>
+              <SearchBarComponent />
             </client-only>
           </div>
         </div>

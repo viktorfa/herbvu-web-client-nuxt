@@ -26,7 +26,7 @@
       <div
         role="listbox"
         name="search-hint"
-        class="search-hint bg-white rounded px-2 relative shadow"
+        class="search-hint bg-white rounded px-2 shadow"
         style="margin-bottom: -10000px; z-index: 10"
         v-show="showAutocomplete"
       >

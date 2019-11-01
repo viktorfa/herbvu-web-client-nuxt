@@ -16,7 +16,10 @@ const getMongoUri = () => {
 };
 const mongoUri = getMongoUri();
 console.log(`Connecting to: ${mongoUri}`);
-const client = new mongodb.MongoClient(mongoUri, { useNewUrlParser: true });
+const client = new mongodb.MongoClient(mongoUri, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+});
 
 module.exports.getCollection = async (collectionName) => {
   await client.connect();

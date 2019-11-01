@@ -1,15 +1,12 @@
 <template>
   <v-navigation-drawer absolute temporary v-model="showDrawer">
-    <div class="flex flex-col justify-between h-full">
+    <div class="flex flex-col justify-between h-full bg-b1">
       <v-list dense>
         <v-list-item>
           <router-link to="/" class="w-full flex" title="Hjem">
-            <v-list-item-avatar>
-              <img src="/logo-256x256.png" alt="logo" />
-            </v-list-item-avatar>
             <v-list-item-content>
               <v-list-item-title>
-                <span class="text-lg">allematpriser.no</span>
+                <img src="/logo-horizontal.svg" class="h-full mx-auto" alt="Logo" />
               </v-list-item-title>
             </v-list-item-content>
           </router-link>

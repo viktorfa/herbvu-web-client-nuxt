@@ -2,17 +2,18 @@ import { getAutocompleteData } from "~/api";
 
 let autocompleteData = {
   tokens: [],
-  bigrams: [],
-  fullgrams: [],
+  ngrams: [],
 };
 
 const initalize = async () => {
   const { ok, data, error } = await getAutocompleteData();
   if (ok) {
+    const ngrams = Array.from(
+      new Set([...data.heading_bigrams, ...data.heading_fullgrams]),
+    );
     autocompleteData = {
       tokens: data.heading_tokens,
-      bigrams: data.heading_bigrams,
-      fullgrams: data.heading_fullgrams,
+      ngrams,
     };
   } else {
     console.warn("Could not load autocomplete data");
@@ -31,16 +32,17 @@ const defaultAutocomplete = [
   "laks",
 ];
 
-export const getHints = (
-  query,
-  { tokens, bigrams, fullgrams } = autocompleteData,
-) => {
+export const getHints = (query, { tokens, ngrams } = autocompleteData) => {
   if (!query || query.length === 0) return defaultAutocomplete;
-  else if (query.lastIndexOf(" ") !== -1) {
-    return [...fullgrams, ...bigrams];
+  const re = new RegExp(query, "ig");
+  let candidates = [];
+  if (query.lastIndexOf(" ") !== -1) {
+    candidates.push(...ngrams);
   } else {
-    return [...defaultAutocomplete, ...tokens];
+    candidates.push(...tokens);
   }
+  console.log(candidates);
+  return candidates.filter((x) => re.test(x));
 };
 
 initalize();

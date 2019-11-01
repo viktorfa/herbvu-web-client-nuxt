@@ -14,14 +14,12 @@
   border-color: var(--europris-color);
 }
 
-.search-input {
-  margin: 0.3em 0.3em 0 0.3em !important;
-  background-color: var(--background-color) !important;
+#main-content {
+  min-height: 80vh;
 }
-.v-input__slot {
-  border-radius: 12px !important;
-}
-.v-input__append-inner:last-child {
-  /* Remove the dropdown icon on search bar */
-  display: none !important;
+
+footer a,
+footer a:visited,
+footer a:active {
+  color: var(--t2) !important;
 }

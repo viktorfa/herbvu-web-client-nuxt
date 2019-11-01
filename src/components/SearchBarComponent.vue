@@ -1,25 +1,45 @@
 <template>
-  <v-combobox
-    ref="searchInput"
-    v-model="queryInput"
-    :search-input.sync="searchInput"
-    label="Søk i 3 nettbutikker og alle tilbud"
-    type="search"
-    solo
-    clearable
-    :loading="isSearching === true"
-    class="search-input"
-    :items="autocomplete"
-    :menu-props="{
-        closeOnClick: false,
-        closeOnContentClick: false,
-        openOnClick: false,
-      }"
-  >
-    <template v-slot:prepend-inner>
-      <slot name="prepend-inner"></slot>
-    </template>
-  </v-combobox>
+  <div class="max-w-md text-xl w-full">
+    <form @change.stop.prevent @submit.stop.prevent="gar">
+      <div class="flex align-center">
+        <input
+          ref="searchInputElement"
+          type="search"
+          v-model="typeInput"
+          class="bg-white w-full rounded px-2 py-1"
+          placeholder="Søk i 3 nettbutikker og alle tilbud"
+          @blur="showAutocomplete = false"
+          @focus="showAutocomplete = true"
+          :autofocus="false"
+          aria-label="Søk"
+        />
+        <div
+          class="flex justify-center align-center"
+          style="width: 32px; margin-left: -32px;"
+          aria-label="Tilbakestill søketekst"
+          @click="clearTypeInput"
+          v-show="!!typeInput"
+        >
+          <v-icon>close</v-icon>
+        </div>
+      </div>
+      <div
+        role="listbox"
+        name="search-hint"
+        class="search-hint bg-white rounded px-2 relative shadow"
+        style="margin-bottom: -10000px; z-index: 10"
+        v-show="showAutocomplete"
+      >
+        <div
+          @click="() => selectAutocomplete(x)"
+          :key="x"
+          :value="x"
+          v-for="x in [...autocomplete.slice(0, 10)]"
+          class="hover:text-blue-400 my-1"
+        >{{x}}</div>
+      </div>
+    </form>
+  </div>
 </template>
 
 <script>
@@ -37,21 +57,38 @@ export default {
        */
       queryInput: this.$route.params.query || this.$store.state.searchQuery,
       /** The input to the combobox that should only determine hints for autocomplete. Should be local state. */
-      searchInput: "",
+      typeInput: "",
+      showAutocomplete: false,
     };
   },
   computed: {
     ...mapState(["isSearching", "showDrawer", "searchResults"]),
     autocomplete() {
-      return getHints(this.searchInput);
+      return getHints(this.typeInput);
+    },
+  },
+  methods: {
+    gar(a) {
+      this.queryInput = this.typeInput;
+    },
+    selectAutocomplete(text) {
+      console.log(text);
+      this.queryInput = text;
+    },
+    clearTypeInput() {
+      this.typeInput = "";
+      this.$refs.searchInputElement.blur();
     },
   },
   watch: {
-    /** Focus input if search result is empty. */
+    /** Focus input if search result is empty. Little bit complicated, as searchResult will update several times for a query. One of which might be empty. */
     searchResults(newValue) {
+      return;
+      /*
       if (newValue.length === 0) {
-        this.$refs.searchInput.focus();
+        this.$refs.searchInputElement.focus();
       }
+      */
     },
     /** Communicates the current query with the router. */
     queryInput(newValue) {
@@ -63,7 +100,8 @@ export default {
         }
       }
       this.$nextTick(() => {
-        this.$refs.searchInput.blur();
+        this.typeInput = newValue;
+        this.$refs.searchInputElement.blur();
       });
     },
     /**
@@ -72,21 +110,15 @@ export default {
      */
     $route() {
       this.$nextTick(() => {
-        this.$refs.searchInput.blur();
+        this.$refs.searchInputElement.blur();
       });
     },
     /** Dropdown in search box should go away when opening side menu. */
     showDrawer(newValue) {
       if (newValue === true) {
-        this.$refs.searchInput.blur();
+        this.$refs.searchInputElement.blur();
       }
     },
   },
 };
 </script>
-
-<style>
-.v-autocomplete__content {
-  top: 56px !important; /* Autocomplete for type-ahead covers all screen on mobile so we push it down */
-}
-</style>

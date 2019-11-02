@@ -1,44 +1,55 @@
 <template>
-  <v-dialog v-model="dialog">
-    <template v-slot:activator="{ on }">
-      <slot name="activator">
-        <v-btn outlined text color="blue darken-4" v-on="on">Del</v-btn>
-      </slot>
-    </template>
-    <v-card class="flex flex-col items-center">
-      <div class="text-2xl my-2 text-center">{{title}}</div>
-      <input
-        class="w-full text-center"
-        readonly
-        type="text"
-        :value="url"
-        :id="`${_uid}share-url-input`"
-      />
-      <v-card-actions class="flex justify-center">
-        <v-btn large icon @click="handleClickCopy" name="Kopier link" aria-label="Kopier link">
-          <v-icon size="xx-large" color="grey">mdi-content-copy</v-icon>
-        </v-btn>
-        <v-btn
-          large
-          icon
-          v-for="({ icon, href, color }) in _socialLinkData"
-          :key="icon"
-          :href="href"
-        >
-          <v-icon size="xx-large" :color="color">{{icon}}</v-icon>
-        </v-btn>
-      </v-card-actions>
-      <div class="text-uppercase text-gray-600" v-show="showCopySuccessMessage">Kopiert</div>
-      <div style="visibility: hidden;" v-show="!showCopySuccessMessage">_</div>
-    </v-card>
-  </v-dialog>
+  <div>
+    <div v-if="!dialog">
+      <AmpButton text="Del" @click="dialog = true" />
+    </div>
+    <div v-else>
+      <div
+        class="fixed w-screen h-screen left-0 top-0 z-40"
+        @click="dialog = false"
+        :style="{background: 'rgba(0, 0, 0, 0.4)'}"
+      ></div>
+      <div class="fixed z-50 dialog-center-box bg-b1 text-t1 w-full max-w-md rounded">
+        <div class="flex flex-col items-center">
+          <div class="text-2xl my-2 text-center">{{title}}</div>
+          <input
+            class="w-full text-center"
+            readonly
+            type="text"
+            :value="url"
+            :id="`${_uid}share-url-input`"
+          />
+          <div class="flex justify-center">
+            <v-btn large icon @click="handleClickCopy" name="Kopier link" aria-label="Kopier link">
+              <v-icon size="xx-large" color="grey">mdi-content-copy</v-icon>
+            </v-btn>
+            <v-btn
+              large
+              icon
+              v-for="({ icon, href, color }) in _socialLinkData"
+              :key="icon"
+              :href="href"
+            >
+              <v-icon size="xx-large" :color="color">{{icon}}</v-icon>
+            </v-btn>
+          </div>
+          <div class="text-uppercase text-gray-600" v-show="showCopySuccessMessage">Kopiert</div>
+          <div style="visibility: hidden;" v-show="!showCopySuccessMessage">_</div>
+        </div>
+      </div>
+    </div>
+  </div>
 </template>
 
 <script>
 import { getSocialLinkData } from "~/util/sharing";
+import AmpButton from "./AmpButton";
 
 export default {
   name: "ShareDialog",
+  components: {
+    AmpButton,
+  },
   props: {
     title: { type: String, required: true },
     url: { type: String, required: true },
@@ -97,4 +108,9 @@ export default {
 </script>
 
 <style>
+.dialog-center-box {
+  top: 50%;
+  left: 50%;
+  transform: translateX(-50%) translateY(-50%);
+}
 </style>

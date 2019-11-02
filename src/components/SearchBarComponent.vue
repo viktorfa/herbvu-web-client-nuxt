@@ -1,6 +1,6 @@
 <template>
   <div class="max-w-md text-xl w-full">
-    <form @change.stop.prevent @submit.stop.prevent="gar">
+    <form @change.stop.prevent @submit.stop.prevent="submitSearchForm">
       <div class="flex align-center">
         <input
           ref="searchInputElement"
@@ -8,7 +8,7 @@
           v-model="typeInput"
           class="bg-white w-full rounded px-2 py-1"
           placeholder="Søk i 3 nettbutikker og alle tilbud"
-          @blur="showAutocomplete = false"
+          @blur="handleSearchInputBlur"
           @focus="showAutocomplete = true"
           :autofocus="false"
           aria-label="Søk"
@@ -26,8 +26,7 @@
       <div
         role="listbox"
         name="search-hint"
-        class="search-hint bg-white rounded px-2 shadow"
-        style="margin-bottom: -10000px; z-index: 10"
+        class="search-hint bg-white rounded px-2 shadow absolute z-10"
         v-show="showAutocomplete"
       >
         <div
@@ -68,11 +67,17 @@ export default {
     },
   },
   methods: {
-    gar(a) {
+    handleSearchInputBlur() {
+      // For some reason, the selectAutocomplete event does not happen unless there is a timeout.
+      // Something to do with the blur and showing of the autocomplete list...
+      setTimeout(() => {
+        this.showAutocomplete = false;
+      }, 50);
+    },
+    submitSearchForm() {
       this.queryInput = this.typeInput;
     },
     selectAutocomplete(text) {
-      console.log(text);
       this.queryInput = text;
     },
     clearTypeInput() {
@@ -122,3 +127,14 @@ export default {
   },
 };
 </script>
+
+<style>
+.search-hint {
+  width: calc(100vw - 0.5rem);
+}
+@media screen and (min-width: 768px) {
+  .search-hint {
+    width: 28rem;
+  }
+}
+</style>

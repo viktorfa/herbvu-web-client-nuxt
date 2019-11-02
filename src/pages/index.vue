@@ -3,7 +3,7 @@
     <div class="text-xs-center offer-search-results">
       <ProductListBanner class="bg-amp-purple text-white">Utvalgte tilbud</ProductListBanner>
       <div v-if="isLoadingPromotedProducts" class="text-center absolute mx-auto w-full">
-        <v-progress-circular :size="20" :width="3" color="purple" indeterminate />
+        <AmpSpinner :size="20" :width="3" color="purple" indeterminate />
       </div>
       <PromotedProducts :products="promotedProducts" />
     </div>
@@ -14,6 +14,7 @@
 import { mapState } from "vuex";
 
 import PromotedProducts from "../components/PromotedProducts.vue";
+import AmpSpinner from "../components/AmpSpinner.vue";
 import ProductListBanner from "../components/ProductListBanner.vue";
 import { getAllMetaInfo } from "../util/meta-tags";
 
@@ -22,6 +23,7 @@ export default {
   components: {
     PromotedProducts,
     ProductListBanner,
+    AmpSpinner,
   },
   computed: {
     ...mapState(["promotedProducts", "isLoadingPromotedProducts"]),

@@ -23,16 +23,12 @@ export default {
     link: [
       ...getLinkTags(),
       { rel: "icon", type: "image/x-icon", href: "/favicon.ico" },
-      {
-        rel: "stylesheet",
-        href: "https://fonts.googleapis.com/css?family=Material+Icons",
-      },
     ],
   },
   /*
    ** Customize the progress-bar color
    */
-  loading: { color: "#fff" },
+  loading: { color: "#EEC643" },
   /*
    ** Global CSS
    */
@@ -46,7 +42,6 @@ export default {
    */
   buildModules: [
     // Doc: https://github.com/nuxt-community/eslint-module
-    "@nuxtjs/vuetify",
     "@nuxtjs/tailwindcss",
   ],
   /*
@@ -109,19 +104,6 @@ export default {
     optimization: { minimize: false },
   },
   purgeCSS: {
-    // Adding all these Vuetify classes bloates our css a lot.
-    // Should replace add Vuetify theme CSS to our own css files so save
-    // some 40kb in the CSS bundle.
-    whitelistPatterns: [/^v-/, /^theme--/, /--text$/],
-    extractors: [
-      {
-        extractor: class {
-          static extract(content) {
-            return content.match(/[A-Za-z0-9-_:/]+/g) || [];
-          }
-        },
-      },
-    ],
     content: ["./src/**/*.vue", "./src/**/*.html"],
   },
   generate: {

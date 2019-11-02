@@ -10,14 +10,14 @@
         />
       </template>
     </div>
-    <v-btn
+    <AmpButton
       @click="showMore"
       v-if="isMore"
       color="blue darken-4"
       block
       text
       v-enter-viewport="useInfiniteScroll ? showMore : null"
-    >mer</v-btn>
+    >mer</AmpButton>
     <br v-else />
   </div>
 </template>
@@ -25,10 +25,11 @@
 <script>
 import take from "lodash/take";
 import ProductListItem from "./ProductListItem";
+import AmpButton from "./AmpButton";
 
 export default {
   name: "ProductList",
-  components: { ProductListItem },
+  components: { ProductListItem, AmpButton },
   props: {
     products: Array,
     showSubtitle: { type: Boolean, default: true },

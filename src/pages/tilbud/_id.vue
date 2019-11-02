@@ -1,7 +1,7 @@
 <template>
   <div>
     <div v-show="isLoadingDetailProduct" class="flex align-center justify-center">
-      <v-progress-circular :size="70" :width="7" color="purple" indeterminate />
+      <AmpSpinner :size="70" :width="7" color="purple" indeterminate />
     </div>
     <div
       v-show="!isLoadingDetailProduct && detailProductNotFound"
@@ -18,13 +18,10 @@
           <ProductDetail :product="product" />
         </div>
       </div>
-      <h2
-        v-show="_similarProducts.length > 0"
-        class="text-2xl m-4 text-center"
-      >Lignende varer</h2>
+      <h2 v-show="_similarProducts.length > 0" class="text-2xl m-4 text-center">Lignende varer</h2>
       <div>
         <div v-show="isLoadingSimilarProducts" class="flex align-center justify-center mt-4">
-          <v-progress-circular :size="40" :width="7" color="purple" indeterminate />
+          <AmpSpinner :size="40" :width="7" color="purple" indeterminate />
         </div>
         <ProductList
           v-show="!isLoadingSimilarProducts && _similarProducts"
@@ -40,6 +37,7 @@ import { mapState } from "vuex";
 
 import ProductList from "~/components/ProductList";
 import ProductDetail from "~/components/ProductDetail";
+import AmpSpinner from "~/components/AmpSpinner";
 import { getStandardProduct } from "~/util/products/convert";
 import { getAllMetaInfoForProduct, getAllMetaInfo } from "~/util/meta-tags";
 
@@ -48,6 +46,7 @@ export default {
   components: {
     ProductList,
     ProductDetail,
+    AmpSpinner,
   },
   head() {
     if (this.product) {

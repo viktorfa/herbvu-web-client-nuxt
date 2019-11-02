@@ -23,3 +23,9 @@ footer a:visited,
 footer a:active {
   color: var(--t2) !important;
 }
+
+.dealer-logo-image {
+  object-fit: contain;
+  max-height: 32px;
+  width: 160px;
+}

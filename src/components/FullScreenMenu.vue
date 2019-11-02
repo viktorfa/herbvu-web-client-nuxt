@@ -1,9 +1,9 @@
 <template>
   <div>
     <div>
-      <v-btn icon :aria-label="name" @click.stop="handleClickButton">
-        <v-icon class="text-t1">{{icon}}</v-icon>
-      </v-btn>
+      <AmpButton icon :aria-label="name" @click.stop="handleClickButton">
+        <AmpIcon class="text-t1">{{icon}}</AmpIcon>
+      </AmpButton>
     </div>
     <div v-show="showMenu" class="w-full fixed left-0 top-0 bg-b1 h-screen z-10">
       <div class="max-w-sm mx-auto py-2">
@@ -39,8 +39,11 @@
 </template>
 
 <script>
+import AmpButton from "~/components/AmpButton";
+import AmpIcon from "~/components/AmpIcon";
 export default {
   name: "FullScreenMenu",
+  components: { AmpButton, AmpIcon },
   computed: {
     showMenu() {
       return this.$route.hash.includes("menu=1");

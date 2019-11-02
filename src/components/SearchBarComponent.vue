@@ -20,7 +20,7 @@
           @click="clearTypeInput"
           v-show="!!typeInput"
         >
-          <v-icon>close</v-icon>
+          <AmpIcon>close</AmpIcon>
         </div>
       </div>
       <div
@@ -45,9 +45,11 @@
 import { mapState } from "vuex";
 
 import { getHints } from "~/util/search/autocomplete";
+import AmpIcon from "~/components/AmpIcon";
 
 export default {
   name: "SearchBarComponent",
+  components: { AmpIcon },
   data() {
     return {
       /**

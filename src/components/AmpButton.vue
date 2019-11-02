@@ -13,12 +13,12 @@ export default {
   },
   computed: {
     computedClass() {
-      const baseClass = "ripple uppercase font-semibold py-2 px-4 rounded";
+      const baseClass = "uppercase py-2 px-4 rounded";
       let extraClass = "";
       if (this.disabled) {
-        extraClass = "bg-primary-200 text-primary-text-200";
+        extraClass = "bg-b1 text-t1";
       } else {
-        extraClass = "bg-primary text-primary-text";
+        extraClass = "bg-b1 text-t1";
       }
       return `${baseClass} ${extraClass}`;
     },

@@ -13,7 +13,7 @@ export default {
   },
   computed: {
     computedClass() {
-      const baseClass = "uppercase py-2 px-4 rounded";
+      const baseClass = "uppercase py-2 px-4 rounded m-1";
       let extraClass = "";
       if (this.disabled) {
         extraClass = "bg-b1 text-t1";

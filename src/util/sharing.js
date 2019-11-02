@@ -1,5 +1,7 @@
 import { isMobileOrTablet } from "~/util/helpers";
 import { getAmpShareUrlForProduct } from "~/util/products";
+import { faFacebook } from "@fortawesome/free-brands-svg-icons/faFacebook";
+import { faFacebookMessenger } from "@fortawesome/free-brands-svg-icons/faFacebookMessenger";
 
 export const getSocialLinkDataForProduct = (product) => {
   const ampUrl = getAmpShareUrlForProduct(product);
@@ -11,13 +13,13 @@ export const getSocialLinkData = (url) => {
   if (isMobileOrTablet()) {
     return [
       {
-        icon: "mdi-facebook",
+        icon: faFacebook,
         href: `https://www.facebook.com/sharer.php?u=${encodedUrl}`,
         color: "blue darken-4",
         name: "Del med Facebook",
       },
       {
-        icon: "mdi-facebook-messenger",
+        icon: faFacebookMessenger,
         href: `fb-messenger://share?link=${encodedUrl}`,
         color: "blue",
         name: "Del med Messenger",
@@ -26,13 +28,13 @@ export const getSocialLinkData = (url) => {
   }
   return [
     {
-      icon: "mdi-facebook",
+      icon: faFacebook,
       href: `https://www.facebook.com/sharer.php?u=${encodedUrl}`,
       color: "blue darken-4",
       name: "Del med Facebook",
     },
     {
-      icon: "mdi-facebook-messenger",
+      icon: faFacebookMessenger,
       href: `https://www.facebook.com/dialog/send?link=${encodedUrl}&app_id=704666266622046&redirect_uri=${encodeURIComponent(
         window.location.href,
       )}`,

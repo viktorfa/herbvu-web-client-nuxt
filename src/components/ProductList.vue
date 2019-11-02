@@ -10,15 +10,14 @@
         />
       </template>
     </div>
-    <AmpButton
-      @click="showMore"
-      v-if="isMore"
-      color="blue darken-4"
-      block
-      text
-      v-enter-viewport="useInfiniteScroll ? showMore : null"
-    >mer</AmpButton>
-    <br v-else />
+    <div class="flex justify-center">
+      <AmpButton
+        @click="showMore"
+        v-if="isMore"
+        v-enter-viewport="useInfiniteScroll ? showMore : null"
+      >mer</AmpButton>
+      <br v-else />
+    </div>
   </div>
 </template>
 

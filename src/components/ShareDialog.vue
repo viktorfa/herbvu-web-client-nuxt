@@ -20,23 +20,11 @@
             :id="`${_uid}share-url-input`"
           />
           <div class="flex justify-center">
-            <AmpButton
-              large
-              icon
-              @click="handleClickCopy"
-              name="Kopier link"
-              aria-label="Kopier link"
-            >
-              <AmpIcon size="xx-large" color="grey">mdi-content-copy</AmpIcon>
+            <AmpButton @click="handleClickCopy" name="Kopier link" aria-label="Kopier link">
+              <fa :icon="fa.faCopy" />
             </AmpButton>
-            <AmpButton
-              large
-              icon
-              v-for="({ icon, href, color }) in _socialLinkData"
-              :key="icon"
-              :href="href"
-            >
-              <AmpIcon size="xx-large" :color="color">{{icon}}</AmpIcon>
+            <AmpButton v-for="({ icon, href }, i) in _socialLinkData" :key="i" :href="href">
+              <fa :icon="icon" />
             </AmpButton>
           </div>
           <div class="text-uppercase text-gray-600" v-show="showCopySuccessMessage">Kopiert</div>
@@ -50,13 +38,13 @@
 <script>
 import { getSocialLinkData } from "~/util/sharing";
 import AmpButton from "./AmpButton";
-import AmpIcon from "./AmpIcon";
+
+import { faCopy } from "@fortawesome/free-solid-svg-icons/faCopy";
 
 export default {
   name: "ShareDialog",
   components: {
     AmpButton,
-    AmpIcon,
   },
   props: {
     title: { type: String, required: true },
@@ -70,6 +58,9 @@ export default {
     };
   },
   computed: {
+    fa() {
+      return { faCopy };
+    },
     _socialLinkData() {
       if (this.url) {
         return getSocialLinkData(this.url);

@@ -1,7 +1,7 @@
 <template>
   <div class="max-w-md text-xl w-full">
     <form @change.stop.prevent @submit.stop.prevent="submitSearchForm">
-      <div class="flex align-center">
+      <div class="flex items-center">
         <input
           ref="searchInputElement"
           type="search"
@@ -14,13 +14,13 @@
           aria-label="Søk"
         />
         <div
-          class="flex justify-center align-center"
+          class="flex justify-center items-center"
           style="width: 32px; margin-left: -32px;"
           aria-label="Tilbakestill søketekst"
           @click="clearTypeInput"
           v-show="!!typeInput"
         >
-          <AmpIcon>close</AmpIcon>
+          <fa :icon="fa.faTimes" class="text-gray-700" />
         </div>
       </div>
       <div
@@ -45,11 +45,10 @@
 import { mapState } from "vuex";
 
 import { getHints } from "~/util/search/autocomplete";
-import AmpIcon from "~/components/AmpIcon";
+import { faTimes } from "@fortawesome/free-solid-svg-icons/faTimes";
 
 export default {
   name: "SearchBarComponent",
-  components: { AmpIcon },
   data() {
     return {
       /**
@@ -64,6 +63,9 @@ export default {
   },
   computed: {
     ...mapState(["isSearching", "showDrawer", "searchResults"]),
+    fa() {
+      return { faTimes };
+    },
     autocomplete() {
       return getHints(this.typeInput);
     },

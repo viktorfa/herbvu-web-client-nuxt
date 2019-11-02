@@ -1,11 +1,11 @@
 <template>
   <div>
-    <div v-show="isLoadingDetailProduct" class="flex align-center justify-center">
+    <div v-show="isLoadingDetailProduct" class="flex items-center justify-center">
       <AmpSpinner :size="70" :width="7" color="purple" indeterminate />
     </div>
     <div
       v-show="!isLoadingDetailProduct && detailProductNotFound"
-      class="flex flex-col align-center justify-center text-xl"
+      class="flex flex-col items-center justify-center text-xl"
     >
       <p>Fant ikke tilbud. Mulig varen ikke finnes lenger.</p>
       <div>
@@ -20,7 +20,7 @@
       </div>
       <h2 v-show="_similarProducts.length > 0" class="text-2xl m-4 text-center">Lignende varer</h2>
       <div>
-        <div v-show="isLoadingSimilarProducts" class="flex align-center justify-center mt-4">
+        <div v-show="isLoadingSimilarProducts" class="flex items-center justify-center mt-4">
           <AmpSpinner :size="40" :width="7" color="purple" indeterminate />
         </div>
         <ProductList

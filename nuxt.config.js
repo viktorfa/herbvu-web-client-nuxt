@@ -36,7 +36,7 @@ export default {
   /*
    ** Plugins to load before mounting the App
    */
-  plugins: ["~/plugins/directives.js"],
+  plugins: ["~/plugins/directives.js", "~/plugins/fa.js"],
   /*
    ** Nuxt.js dev-modules
    */
@@ -71,14 +71,6 @@ export default {
       },
     ],
   ],
-  /*
-   ** vuetify module configuration
-   ** https://github.com/nuxt-community/vuetify-module
-   */
-  vuetify: {
-    // customVariables: ["~/assets/variables.scss"],
-    // treeShake: false,
-  },
   /*
    ** Build configuration
    */

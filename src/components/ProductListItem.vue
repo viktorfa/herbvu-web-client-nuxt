@@ -1,6 +1,6 @@
 <template>
   <div class="result-list-item flex flex-col text-center">
-    <router-link :to="`/tilbud/${id}`" class="search-result-link flex flex-col justify-between">
+    <nuxt-link :to="`/tilbud/${id}`" class="search-result-link flex flex-col justify-between">
       <div>
         <div v-lazyload v-if="showDealerLogo && dealerLogoSrc">
           <img class="dealer-logo-image" :data-url="dealerLogoSrc" :alt="dealer" />
@@ -19,7 +19,7 @@
         <div v-if="value">{{ value }}</div>
         <div v-else :style="{visibility: 'hidden'}">_</div>
       </div>
-    </router-link>
+    </nuxt-link>
   </div>
 </template>
 

@@ -9,7 +9,7 @@
         @click="dialog = false"
         :style="{background: 'rgba(0, 0, 0, 0.4)'}"
       ></div>
-      <div class="fixed z-50 dialog-center-box bg-b1 text-t1 w-full max-w-md rounded">
+      <div class="fixed z-50 dialog-center-box bg-b1 text-t1 w-full max-w-md rounded shadow-md">
         <div class="flex flex-col items-center">
           <div class="text-2xl my-2 text-center">{{title}}</div>
           <input

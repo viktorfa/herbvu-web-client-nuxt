@@ -2,10 +2,10 @@
   <div>
     <div class="bg-b1 text-t1">
       <div class="max-w-content mx-auto p-1">
-        <div class="absolute right-0 h-12 my-1 flex items-center">
+        <div class="h-12 my-1 flex items-center absolute right-0 md:float-right md:static">
           <FullScreenMenu />
         </div>
-        <div class="flex flex-col md:flex-row">
+        <div class="flex flex-col md:flex-row items-center">
           <div class="h-12 my-1 text-center">
             <nuxt-link to="/" name="Hjem">
               <img src="/logo-horizontal.svg" class="h-full mx-auto" alt="Logo" />

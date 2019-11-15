@@ -44,7 +44,7 @@
 <script>
 import { mapState } from "vuex";
 
-import { getHints } from "~/util/search/autocomplete";
+import { getHints, initalize } from "~/util/search/autocomplete";
 import { faTimes } from "@fortawesome/free-solid-svg-icons/faTimes";
 
 export default {
@@ -128,6 +128,9 @@ export default {
         this.$refs.searchInputElement.blur();
       }
     },
+  },
+  mounted() {
+    initalize();
   },
 };
 </script>

@@ -5,7 +5,7 @@ let autocompleteData = {
   ngrams: [],
 };
 
-const initalize = async () => {
+export const initalize = async () => {
   const { ok, data, error } = await getAutocompleteData();
   if (ok) {
     const ngrams = Array.from(
@@ -41,8 +41,5 @@ export const getHints = (query, { tokens, ngrams } = autocompleteData) => {
   } else {
     candidates.push(...tokens);
   }
-  console.log(candidates);
   return candidates.filter((x) => re.test(x));
 };
-
-initalize();

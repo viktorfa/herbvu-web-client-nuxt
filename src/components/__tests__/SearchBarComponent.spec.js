@@ -1,7 +1,6 @@
 import { shallowMount, createLocalVue } from "@vue/test-utils";
 import Vuex from "vuex";
 import VueRouter from "vue-router";
-import Vuetify from "vuetify";
 
 import SearchBarComponent from "../SearchBarComponent.vue";
 
@@ -17,10 +16,8 @@ describe("SearchBarComponent", () => {
     localVue = createLocalVue();
     localVue.use(Vuex);
     localVue.use(VueRouter);
-    localVue.use(Vuetify);
     state = {};
     actions = {};
-    vuetify = new Vuetify();
     store = new Vuex.Store({ actions, state });
     router = new VueRouter();
   });

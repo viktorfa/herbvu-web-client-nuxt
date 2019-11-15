@@ -4,8 +4,7 @@ import { getHints } from "../autocomplete";
 
 const autocompleteData = {
   tokens: autocompleteDataResponse.heading_tokens,
-  bigrams: autocompleteDataResponse.heading_bigrams,
-  fullgrams: autocompleteDataResponse.heading_fullgrams,
+  ngrams: autocompleteDataResponse.heading_bigrams,
 };
 
 describe("getHints", () => {

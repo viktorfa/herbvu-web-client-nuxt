@@ -4,15 +4,19 @@
       <AmpSpinner :size="70" :width="7" color="purple" indeterminate />
     </div>
     <div
-      v-show="!isLoadingDetailProduct && detailProductNotFound"
+      v-if="!isLoadingDetailProduct && detailProductNotFound"
       class="flex flex-col items-center justify-center text-xl"
     >
       <p>Fant ikke tilbud. Mulig varen ikke finnes lenger.</p>
       <div>
-        <nuxt-link to="/" replace>Tilbake</nuxt-link>
+        <nuxt-link to="/" replace>Til startsiden</nuxt-link>
       </div>
     </div>
-    <div v-show="!isLoadingDetailProduct" v-if="product" class="text-xs-center">
+    <div
+      v-show="!isLoadingDetailProduct"
+      v-if="product && !detailProductNotFound"
+      class="text-xs-center"
+    >
       <div class="flex justify-center">
         <div class="w-full max-w-4xl">
           <ProductDetail :product="product" />

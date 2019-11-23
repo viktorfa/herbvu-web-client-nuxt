@@ -3,7 +3,7 @@ import uniqBy from "lodash/uniqBy";
 import { productMutations } from "./_mutations";
 import { getPromotedOffers, getGroceryOffer, searchGroceryOffers } from "~/api";
 import { isProductUri } from "~/util/products";
-
+import { getStandardProduct } from "~/util/products/convert";
 
 export const productActions = {
   EXECUTE_SEARCH_QUERY: "EXECUTE_SEARCH_QUERY",
@@ -37,11 +37,11 @@ export const actions = {
       const filteredProducts = uniqBy(
         data,
         (offer) => offer.heading + offer.dealer + offer.pricing.price,
-        );
-        commit(productMutations.setPromotedProducts, filteredProducts);
-      } else {
-        commit(productMutations.setErrorMessage, error);
-      }
+      );
+      commit(productMutations.setPromotedProducts, filteredProducts);
+    } else {
+      commit(productMutations.setErrorMessage, error);
+    }
     commit(productMutations.setIsLoadingPromotedProducts, false);
     console.log("UPDATE_PROMOTED_PRODUCTS finish");
   },
@@ -82,7 +82,9 @@ export const actions = {
   },
   async [productActions.LOAD_SIMILAR_PRODUCTS]({ commit }, { product }) {
     commit(productMutations.setIsLoadingSimilarProducts, true);
-    const { data, error } = await searchGroceryOffers(product.heading);
+    const { data, error } = await searchGroceryOffers(
+      getStandardProduct(product).title,
+    );
     if (data) {
       commit(productMutations.setSimilarProducts, data);
     } else {

@@ -4,6 +4,7 @@ import { getShopgunOfferCatalogUrl, getProductValue } from "~/util/products";
 export const shopgunOfferToAmpOffer = (shopgunOffer) => {
   return {
     ...shopgunOffer,
+    title: shopgunOffer.heading,
     image_url: shopgunOffer.images.zoom,
     href: getShopgunOfferCatalogUrl(shopgunOffer),
     dealer: shopgunOffer.branding.name,
@@ -26,13 +27,13 @@ export const getStandardProduct = (product) => {
       };
     default:
       return {
-        title: product.heading,
+        title: product.title || product.heading,
         price: product.pricing.price,
         subtitle: product.description,
         description: product.description,
         dealer: product.dealer,
         href: product.href,
-        image_url: product.image_url,
+        image_url: product.imageUrl || product.image_url,
         id: product.uri,
         value: getProductValue(product),
       };

@@ -4,7 +4,7 @@ export const getOffers = async (limit = 2 ** 16) => {
   const now = new Date();
   const collection = await getCollection("groceryoffer");
   return collection
-    .find({ run_till: { $gt: now } })
+    .find({ validThrough: { $gt: now } })
     .limit(limit)
     .toArray();
 };

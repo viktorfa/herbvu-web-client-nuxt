@@ -84,6 +84,10 @@ export const getPromotedOffers = async (offerLimit = 30) => {
 };
 
 export const searchGroceryOffers = async (query) => {
+  if (!query) {
+    console.warn("Empty query for search");
+    return { data: [] };
+  }
   const cachedResponse = cache.get(query.toLowerCase());
   if (cachedResponse) {
     console.log("using cache");

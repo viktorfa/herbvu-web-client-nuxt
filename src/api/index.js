@@ -76,7 +76,7 @@ export const getPromotedOffers = async (offerLimit = 30) => {
   latestToday.setUTCHours(23);
 
   const strapiCollectionName = "groceryoffers";
-  const strapiUrlParameterString = `run_till_gt=${earliestToday.toISOString()}&run_from_lt=${latestToday.toISOString()}&_limit=${offerLimit}&_sort=select_method:DESC&is_promoted=true`;
+  const strapiUrlParameterString = `validThrough_gt=${earliestToday.toISOString()}&_limit=${offerLimit}&_sort=select_method:DESC&is_promoted=true`;
   const response = await fetch(
     `${strapiUrl}/${strapiCollectionName}?${strapiUrlParameterString}`,
   );

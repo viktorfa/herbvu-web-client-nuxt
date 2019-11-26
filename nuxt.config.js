@@ -81,7 +81,7 @@ export default {
      */
     extend(config, ctx) {},
     // We instead minify with golang which is magnitudes faster
-    html: {
+    /*html: {
       minify: {
         collapseBooleanAttributes: false,
         decodeEntities: false,
@@ -94,7 +94,7 @@ export default {
         useShortDoctype: false,
       },
     },
-    optimization: { minimize: false },
+    optimization: { minimize: false },*/
   },
   purgeCSS: {
     content: ["./src/**/*.vue", "./src/**/*.html"],

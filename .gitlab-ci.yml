@@ -21,11 +21,11 @@ build:
     - npm install yarn -g
     - npm install node-gyp -g
     # Install Go minify
-    - go get github.com/tdewolff/minify/cmd/minify
+    # - go get github.com/tdewolff/minify/cmd/minify
   script:
     - yarn install
     - yarn generate
-    - $GOPATH/bin/minify -r -o dist/ dist
+    # - $GOPATH/bin/minify -r -o dist/ dist
 
 deploy:
   stage: deploy

@@ -19,10 +19,16 @@ console.log(`Connecting to: ${mongoUri}`);
 const client = new mongodb.MongoClient(mongoUri, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
+  keepAlive: false,
 });
 
 module.exports.getCollection = async (collectionName) => {
   await client.connect();
   const db = client.db(mongoDatabase);
   return db.collection(collectionName);
+};
+module.exports.closeConnection = () => {
+  client.close(() => {
+    console.log("Closing Mongo connection.");
+  });
 };

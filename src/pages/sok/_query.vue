@@ -50,6 +50,7 @@ export default {
           eventAction: "search",
           eventLabel: newValue,
         });
+        this.$ga.page(`/sok/?s=${newValue}`);
       }
     },
     queryString(newQuery) {

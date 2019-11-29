@@ -29,3 +29,9 @@ footer a:active {
   max-height: 32px;
   width: 160px;
 }
+
+.center-bg-image {
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+}

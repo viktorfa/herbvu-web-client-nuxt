@@ -2,6 +2,7 @@ import dotenv from "dotenv-safe";
 import { getOffers } from "./build/static-routes";
 import { getLinkTags } from "./build/head";
 import { getAllMetaInfo } from "./src/util/meta-tags";
+import { categories } from "./src/components/CategoryCards/helpers";
 dotenv.config();
 
 const { meta, title } = getAllMetaInfo();
@@ -104,11 +105,18 @@ export default {
       const prefix = "/tilbud/";
       const offers = await getOffers();
       console.info(`Generating ${offers.length} product pages.`);
-      return offers.map((offer) => ({
-        route: `${prefix}${offer.uri}`,
-        payload: offer,
-        url: `${prefix}${offer.uri}`,
-      }));
+      return [
+        ...categories.map((cat) => ({
+          route: `/${cat.slug}`,
+          payload: cat,
+          url: `/${cat.slug}`,
+        })),
+        ...offers.map((offer) => ({
+          route: `${prefix}${offer.uri}`,
+          payload: offer,
+          url: `${prefix}${offer.uri}`,
+        })),
+      ];
     },
   },
 };

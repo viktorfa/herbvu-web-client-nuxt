@@ -1,6 +1,8 @@
 <template>
   <div>
     <div class="text-xs-center offer-search-results">
+      <ProductListBanner class="bg-red-800 text-white">Følg med på julepriskrigen</ProductListBanner>
+      <CategoryCards />
       <ProductListBanner class="bg-amp-purple text-white">Utvalgte tilbud</ProductListBanner>
       <div v-if="isLoadingPromotedProducts" class="text-center absolute mx-auto w-full">
         <AmpSpinner :size="20" :width="3" color="purple" indeterminate />
@@ -13,6 +15,7 @@
 <script>
 import { mapState } from "vuex";
 
+import CategoryCards from "../components/CategoryCards";
 import PromotedProducts from "../components/PromotedProducts.vue";
 import AmpSpinner from "../components/AmpSpinner.vue";
 import ProductListBanner from "../components/ProductListBanner.vue";
@@ -21,6 +24,7 @@ import { getAllMetaInfo } from "../util/meta-tags";
 export default {
   name: "MainPage",
   components: {
+    CategoryCards,
     PromotedProducts,
     ProductListBanner,
     AmpSpinner,

@@ -75,7 +75,6 @@ export const actions = {
     commit(productMutations.setIsLoading, true);
     if (queryString) {
       const { data, error } = await searchGroceryOffers(queryString);
-
       if (data) {
         commit(productMutations.setCategoryProducts, data);
       } else {

@@ -38,13 +38,7 @@ export default {
     });
   },
   computed: {
-    ...mapState([
-      "searchResults",
-      "isSearching",
-      "searchQuery",
-      "isLoading",
-      "categoryProducts",
-    ]),
+    ...mapState(["isLoading", "categoryProducts"]),
     showSearchResults() {
       return !this.isLoading && !!this.categoryProducts;
     },
@@ -65,7 +59,6 @@ export default {
     this.$store.commit("setIsLoading", true);
   },
   mounted() {
-    this.$store.commit("setIsLoading", false);
     this.handleNewCategory(this.categoryObject);
   },
   methods: {
@@ -86,5 +79,4 @@ export default {
 };
 </script>
 
-<style>
-</style>
+<style></style>

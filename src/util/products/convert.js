@@ -31,7 +31,7 @@ export const getStandardProduct = (product) => {
         price: product.pricing.price,
         subtitle: product.description,
         description: product.description,
-        dealer: product.dealer,
+        dealer: product.dealer || product.provenance,
         href: product.href,
         image_url: product.imageUrl || product.image_url,
         id: product.uri,

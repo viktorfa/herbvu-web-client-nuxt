@@ -37,7 +37,10 @@ export const dealerLogos = {
     "https://d3ikkoqs9ddhdl.cloudfront.net/img/logo/default/00ibuh342s8djg4z.png",
   "meny.no":
     "https://d3ikkoqs9ddhdl.cloudfront.net/img/logo/default/00ibththm6hm0b3i.png",
+  meny:
+    "https://d3ikkoqs9ddhdl.cloudfront.net/img/logo/default/00ibththm6hm0b3i.png",
   "europris.no":
     "https://d3ikkoqs9ddhdl.cloudfront.net/img/logo/default/00icyhkb014zpw1q.png",
   "kolonial.no": kolonialLogo,
+  kolonial: kolonialLogo,
 };

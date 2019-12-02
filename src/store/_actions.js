@@ -1,12 +1,18 @@
 import uniqBy from "lodash/uniqBy";
 
 import { productMutations } from "./_mutations";
-import { getPromotedOffers, getGroceryOffer, searchGroceryOffers } from "~/api";
+import {
+  getPromotedOffers,
+  getGroceryOffer,
+  searchGroceryOffers,
+  getCategoryOffers,
+} from "~/api";
 import { isProductUri } from "~/util/products";
 import { getStandardProduct } from "~/util/products/convert";
 
 export const productActions = {
   EXECUTE_SEARCH_QUERY: "EXECUTE_SEARCH_QUERY",
+  LOAD_CATEGORY_PRODUCTS: "LOAD_CATEGORY_PRODUCTS",
   LOAD_PROMOTED_PRODUCTS: "LOAD_PROMOTED_PRODUCTS",
   UPDATE_PROMOTED_PRODUCTS: "UPDATE_PROMOTED_PRODUCTS",
   LOAD_DETAIL_PRODUCT: "LOAD_DETAIL_PRODUCT",
@@ -60,6 +66,36 @@ export const actions = {
       console.error(error);
     }
     commit(productMutations.setIsSearching, false);
+  },
+  async [productActions.LOAD_CATEGORY_PRODUCTS](
+    { commit },
+    { queryString, offerType },
+  ) {
+    console.log(`LOAD_CATEGORY_PRODUCTS for ${queryString || offerType}`);
+    commit(productMutations.setIsLoading, true);
+    if (queryString) {
+      const { data, error } = await searchGroceryOffers(queryString);
+
+      if (data) {
+        commit(productMutations.setCategoryProducts, data);
+      } else {
+        commit(productMutations.setErrorMessage, error);
+        console.error(error);
+      }
+    } else if (offerType) {
+      const { data, error } = await getCategoryOffers(offerType);
+      if (data) {
+        commit(productMutations.setCategoryProducts, data);
+      } else {
+        commit(productMutations.setErrorMessage, error);
+        console.error(error);
+      }
+    } else {
+      throw new Error(
+        "Need query string or category key for category products",
+      );
+    }
+    commit(productMutations.setIsLoading, false);
   },
   async [productActions.LOAD_DETAIL_PRODUCT]({ commit }, { id }) {
     if (isProductUri(id)) {

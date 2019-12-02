@@ -1,18 +1,18 @@
 <template>
   <div>
-    <div v-show="isSearching === true" class="text-3xl text-center">
+    <div v-show="isLoading === true" class="text-3xl text-center">
       <p>finner tilbud på</p>
-      <strong>{{ categoryObject.query }}</strong>
+      <strong>{{ categoryObject.text }}</strong>
     </div>
     <div
-      v-show="searchResults.length === 0 && showSearchResults && !isSearching"
+      v-show="categoryProducts.length === 0 && showSearchResults && !isLoading"
       class="text-3xl text-center"
     >
       <p>Ingen tilbud på</p>
       <strong>{{ categoryObject.query }}</strong>
     </div>
     <div v-show="showSearchResults">
-      <SearchResults :results="searchResults" />
+      <SearchResults :results="categoryProducts" />
     </div>
   </div>
 </template>
@@ -38,9 +38,15 @@ export default {
     });
   },
   computed: {
-    ...mapState(["searchResults", "isSearching", "searchQuery"]),
+    ...mapState([
+      "searchResults",
+      "isSearching",
+      "searchQuery",
+      "isLoading",
+      "categoryProducts",
+    ]),
     showSearchResults() {
-      return !this.isSearching && !!this.searchResults;
+      return !this.isLoading && !!this.categoryProducts;
     },
     categoryObject() {
       const cat = {
@@ -52,27 +58,28 @@ export default {
   },
   watch: {
     categoryObject(newObject) {
-      this.handleNewQuery(newObject.query);
+      this.handleNewCategory(newObject);
     },
   },
   created() {
-    this.$store.commit("setIsSearching", true);
+    this.$store.commit("setIsLoading", true);
   },
   mounted() {
-    this.$store.commit("setIsSearching", false);
-    this.handleNewQuery(this.categoryObject.query);
+    this.$store.commit("setIsLoading", false);
+    this.handleNewCategory(this.categoryObject);
   },
   methods: {
-    handleNewQuery(newQuery) {
-      if (
-        newQuery &&
-        newQuery.length &&
-        newQuery.length > 0 &&
-        newQuery !== this.searchQuery
-      ) {
-        this.$store.dispatch("EXECUTE_SEARCH_QUERY", {
-          queryString: newQuery,
-        });
+    handleNewCategory(newCategoryObject) {
+      if (newCategoryObject) {
+        if (newCategoryObject.offerType) {
+          this.$store.dispatch("LOAD_CATEGORY_PRODUCTS", {
+            offerType: newCategoryObject.offerType,
+          });
+        } else if (newCategoryObject.query) {
+          this.$store.dispatch("LOAD_CATEGORY_PRODUCTS", {
+            queryString: newCategoryObject.query,
+          });
+        }
       }
     },
   },

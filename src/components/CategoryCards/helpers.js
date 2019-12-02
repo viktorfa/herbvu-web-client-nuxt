@@ -15,6 +15,6 @@ export const categories = [
     text: "Pepsi Max",
     image: pepsi,
     slug: "pepsi-max",
-    query: "pepsi max",
+    offerType: "pepsi",
   },
 ];

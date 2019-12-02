@@ -99,3 +99,15 @@ export const searchGroceryOffers = async (query) => {
   cache.set(query.toLowerCase(), fetchOption);
   return fetchOption;
 };
+
+export const getCategoryOffers = async (offerType) => {
+  if (!offerType) {
+    return {
+      error: new Error(`${offerType} is not a valid offer type.`),
+    };
+  }
+  const url = `${apiUrl}/offers/special/?type=${offerType}`;
+  const response = await fetch(url);
+  const fetchOption = await getJsonFetchOption(response);
+  return fetchOption;
+};

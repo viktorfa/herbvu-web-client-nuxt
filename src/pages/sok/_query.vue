@@ -1,5 +1,8 @@
 <template>
   <div>
+    <client-only>
+      <SortAndFilterMenu />
+    </client-only>
     <div v-show="isSearching === true" class="text-3xl text-center">
       <p>søker etter</p>
       <strong>{{ queryString }}</strong>
@@ -12,7 +15,7 @@
       <strong>{{ queryString }}</strong>
     </div>
     <div v-show="showSearchResults">
-      <SearchResults :results="searchResults" />
+      <SearchResults :results="filteredResults || searchResults" />
     </div>
   </div>
 </template>
@@ -22,11 +25,13 @@ import { mapState } from "vuex";
 
 import { getAllMetaInfo } from "~/util/meta-tags";
 import SearchResults from "~/components/SearchResults.vue";
+import SortAndFilterMenu from "~/components/SortAndFilterMenu.vue";
 
 export default {
   name: "Search",
   components: {
     SearchResults,
+    SortAndFilterMenu,
   },
   head() {
     return getAllMetaInfo({
@@ -34,7 +39,12 @@ export default {
     });
   },
   computed: {
-    ...mapState(["searchResults", "isSearching", "searchQuery"]),
+    ...mapState([
+      "searchResults",
+      "filteredResults",
+      "isSearching",
+      "searchQuery",
+    ]),
     showSearchResults() {
       return !this.isSearching && !!this.searchResults;
     },

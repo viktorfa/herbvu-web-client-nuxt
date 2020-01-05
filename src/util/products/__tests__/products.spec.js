@@ -67,6 +67,92 @@ describe("getProductValue", () => {
     const actual = getProductValue(product);
     expect(actual).toEqual(expected);
   });
+  test("should calculate quantity value if value is null", () => {
+    const product = {
+      provenance: "iherb",
+      title: "Lakanto, Monkfruit Sweetener, Classic, 3.17 oz (90 g)",
+      description:
+        '0 Net Carbs   Ketogenic   Non GMO Project Verified   Zero Calories   Zero Glycemic   2x Sweeter Than Sugar   Zero Additives   Vegan   Gluten Free   Zero Aftertaste   One Packet = 1 1/2 Teaspoons SugarsOver a Thousand Years AgoIn the  remote mountain highlands of Asia, a group of Buddhist monks called the Luohan  achieved enlightenment and ascension through meditation, prayer and pure living.  On the slopes of a primeval forest, the monks discovered and cultivated a rare  fruit prized for its sweetness. This sacred fruit was named Monk Fruit, or  Luohan Guo, after its devoted caretakers and was used in elixirs to raise chi,  or life energy. Monk Fruit was used for centuries in eastern traditional herbalism to increase chi and well-being, earning it the nickname "The Immortals\' Fruit". We still  grow and harvest Monk Fruit for Lakanto in the same pristine area and according  to traditional and environmental methods. Born from a proprietary mixture of high-purity Monk Fruit extract and Non GMO Erythritol, Lakanto is a delicious zero calorie, zero glycemic sweetener with the sumptuous rich taste of sugar.',
+      validFrom: "2019-12-02T08:31:47.378Z",
+      validThrough: "2019-12-09T08:31:47.378Z",
+      quantity: {
+        size: {
+          unit: {
+            symbol: "g",
+            type: "quantity",
+            si: { symbol: "kg", factor: 0.001 },
+          },
+          amount: { min: 90, max: 90 },
+        },
+        pieces: { unit: null, amount: { min: null, max: null } },
+      },
+      location: "",
+      provenance_id: "LAK-00002",
+      dealer: null,
+      href:
+        "https://www.iherb.com/pr/Lakanto-Monkfruit-Sweetener-Classic-3-17-oz-90-g/73341",
+      brand: "Lakanto",
+      image_url: "https://s3.images-iherb.com/lak/lak00002/b/3.jpg",
+      uri: "iherb:product:LAK-00002",
+      type: "none",
+      is_active: true,
+      _id: "5dd0fd1ee81a2f9f107cab61",
+      additionalProperty: null,
+      availability: "http://schema.org/InStock",
+      canonical_url:
+        "https://www.iherb.com/pr/Lakanto-Monkfruit-Sweetener-Classic-3-17-oz-90-g/73341",
+      categories: [
+        "Brands A-Z",
+        "Lakanto",
+        "Categories",
+        "Grocery",
+        "Honey & Sweeteners",
+        "Monk Fruit (Lo Han)",
+      ],
+      ean: null,
+      gtin: null,
+      gtin12: "843076000020",
+      gtin13: null,
+      gtin8: null,
+      heading: "Lakanto, Monkfruit Sweetener, Classic, 3.17 oz (90 g)",
+      image: "https://s3.images-iherb.com/lak/lak00002/b/3.jpg",
+      itemCondition: "http://schema.org/NewCondition",
+      items: { max: 1, min: 1 },
+      mpn: null,
+      price: 3.99,
+      priceCurrency: "USD",
+      pricing: { price: 3.99, currency: "USD", prePrice: null },
+      run_from: "2019-11-17T07:46:19.447Z",
+      run_till: "2019-11-24T07:46:19.447Z",
+      sku: "LAK-00002",
+      upc: null,
+      url:
+        "https://www.iherb.com/pr/Lakanto-Monkfruit-Sweetener-Classic-3-17-oz-90-g/73341",
+      url_fingerprint: "a76a5611887f6af62693eb9030cd7b77bba5d0b7",
+      value: {
+        size: { unit: null, amount: { min: null, max: null } },
+        pieces: { unit: null, amount: { min: null, max: null } },
+      },
+      gtins: { gtin12: "843076000020" },
+      imageUrl: null,
+      pieces: { unit: null, amount: { min: null, max: null } },
+      provenanceId: "LAK-00002",
+      servingSize: "Serving Size: 1 packet (3 g)",
+      size: {
+        unit: {
+          symbol: "g",
+          type: "quantity",
+          si: { symbol: "kg", factor: 0.001 },
+        },
+        amount: { min: 90, max: 90 },
+      },
+      unitPrice: "$0.13/Count",
+      id: "5dd0fd1ee81a2f9f107cab61",
+    };
+    const expected = "44,33 kr/kg";
+    const actual = getProductValue(product);
+    expect(actual).toEqual(expected);
+  });
   test("should calculate piece value", () => {
     const product = {
       quantity: {

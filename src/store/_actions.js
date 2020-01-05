@@ -9,6 +9,8 @@ import {
 } from "~/api";
 import { isProductUri } from "~/util/products";
 import { getStandardProduct } from "~/util/products/convert";
+import { filterProducts } from "~/util/products/filter";
+import { getSortedProducts } from "~/util/products/sort";
 
 export const productActions = {
   EXECUTE_SEARCH_QUERY: "EXECUTE_SEARCH_QUERY",
@@ -17,9 +19,25 @@ export const productActions = {
   UPDATE_PROMOTED_PRODUCTS: "UPDATE_PROMOTED_PRODUCTS",
   LOAD_DETAIL_PRODUCT: "LOAD_DETAIL_PRODUCT",
   LOAD_SIMILAR_PRODUCTS: "LOAD_SIMILAR_PRODUCTS",
+  FILTER: "FILTER",
 };
 
 export const actions = {
+  async [productActions.FILTER]({ commit, state }, { filters, sort }) {
+    commit(productMutations.setIsFiltering, true);
+    const products = state.searchResults;
+    if (products) {
+      let filteredProducts = filterProducts(products, filters);
+      if (sort) {
+        filteredProducts = getSortedProducts(filteredProducts, sort);
+      }
+      commit(productMutations.setFilteredResults, filteredProducts);
+    } else {
+      commit(productMutations.setErrorMessage, error);
+      console.error(error);
+    }
+    commit(productMutations.setIsFiltering, false);
+  },
   async [productActions.LOAD_PROMOTED_PRODUCTS]({ commit }) {
     console.log("LOAD_PROMOTED_PRODUCTS");
     const { ok, data, error } = await getPromotedOffers();
@@ -54,6 +72,7 @@ export const actions = {
   async [productActions.EXECUTE_SEARCH_QUERY]({ commit }, { queryString }) {
     commit(productMutations.setIsSearching, true);
     commit(productMutations.clearSearchResults);
+    commit(productMutations.setFilteredResults, null);
     console.log(`EXECUTE_SEARCH_QUERY for ${queryString}`);
 
     const { data, error } = await searchGroceryOffers(queryString);
@@ -69,22 +88,25 @@ export const actions = {
   },
   async [productActions.LOAD_CATEGORY_PRODUCTS](
     { commit },
-    { queryString, offerType },
+    { queryString, category },
   ) {
-    console.log(`LOAD_CATEGORY_PRODUCTS for ${queryString || offerType}`);
+    console.log(`LOAD_CATEGORY_PRODUCTS for ${queryString || category}`);
     commit(productMutations.setIsLoading, true);
+    commit(productMutations.clearSearchResults);
+    commit(productMutations.setFilteredResults, null);
     if (queryString) {
       const { data, error } = await searchGroceryOffers(queryString);
       if (data) {
-        commit(productMutations.setCategoryProducts, data);
+        commit(productMutations.loadSearchResults, data);
       } else {
         commit(productMutations.setErrorMessage, error);
         console.error(error);
       }
-    } else if (offerType) {
-      const { data, error } = await getCategoryOffers(offerType);
+    } else if (category) {
+      // Should search by category, but currently just searches with query.
+      const { data, error } = await getCategoryOffers(category);
       if (data) {
-        commit(productMutations.setCategoryProducts, data);
+        commit(productMutations.loadSearchResults, data);
       } else {
         commit(productMutations.setErrorMessage, error);
         console.error(error);

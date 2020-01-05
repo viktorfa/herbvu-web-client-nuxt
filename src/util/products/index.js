@@ -14,9 +14,9 @@ export const getValueString = ({ amount, unit }) => {
     return "";
   }
   if (unit) {
-    return `${formatPrice(amount.max, "")} kr/${unit.symbol}`;
+    return `${formatPrice(amount.max, "")} /${unit.symbol}`;
   }
-  return `${formatPrice(amount.max, "")} kr/stk`;
+  return `${formatPrice(amount.max, "")} /stk`;
 };
 
 export const calculateValue = ({ amount, unit, pricing }) => {
@@ -40,17 +40,21 @@ export const calculateValue = ({ amount, unit, pricing }) => {
 
 export const getProductValue = ({ quantity, value, pricing }) => {
   if (value) {
-    if (value.size && value.size.amount) {
+    if (value.size && value.size.amount && value.size.amount.min) {
       return getValueString(value.size);
-    } else if (value.pieces && value.pieces.amount) {
+    } else if (value.pieces && value.pieces.amount && value.pieces.amount.min) {
       return getValueString(value.pieces);
     }
   }
   if (pricing) {
     if (quantity) {
-      if (quantity.size && quantity.size.amount) {
+      if (quantity.size && quantity.size.amount && quantity.size.amount.min) {
         return getValueString(calculateValue({ ...quantity.size, pricing }));
-      } else if (quantity.pieces && quantity.pieces.amount) {
+      } else if (
+        quantity.pieces &&
+        quantity.pieces.amount &&
+        quantity.pieces.amount.min
+      ) {
         return getValueString(calculateValue({ ...quantity.pieces, pricing }));
       }
     }

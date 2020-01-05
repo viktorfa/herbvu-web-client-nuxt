@@ -3,31 +3,6 @@
     <div v-if="offers.length > 0" class="offer-search-results">
       <ProductListBanner class="bg-amp-purple text-white">{{ offers.length }} tilbud</ProductListBanner>
       <ProductList :useInfiniteScroll="false" :products="offers" :showSubtitle="false" />
-      <br />
-    </div>
-    <div v-if="kolonialProducts.length > 0" class="kolonial-search-results">
-      <ProductListBanner class="bg-kolonial-yellow text-white">
-        {{ kolonialProducts.length }}
-        {{ `${kolonialProducts.length > 1 ? "varer" : "vare"}` }} fra
-        kolonial.no
-      </ProductListBanner>
-      <ProductList :useInfiniteScroll="false" :products="kolonialProducts" :showDealerLogo="false" />
-    </div>
-    <div v-if="menyProducts.length > 0" class="meny-search-results">
-      <ProductListBanner class="bg-meny-red text-white">
-        {{ menyProducts.length }}
-        {{ `${menyProducts.length > 1 ? "varer" : "vare"}` }} fra
-        meny.no
-      </ProductListBanner>
-      <ProductList :useInfiniteScroll="false" :products="menyProducts" :showDealerLogo="false" />
-    </div>
-    <div v-if="europrisProducts.length > 0" class="europris-search-results">
-      <ProductListBanner class="bg-europris-green text-white">
-        {{ europrisProducts.length }}
-        {{ `${europrisProducts.length > 1 ? "varer" : "vare"}` }} fra
-        europris.no
-      </ProductListBanner>
-      <ProductList :useInfiniteScroll="false" :products="europrisProducts" :showDealerLogo="false" />
     </div>
   </div>
 </template>
@@ -38,8 +13,7 @@ import ProductList from "./ProductList";
 import ProductListBanner from "../components/ProductListBanner.vue";
 import { getStandardProduct } from "~/util/products/convert";
 
-const isOffer = (result) =>
-  result.provenance === "shopgun" || result.provenance === "custom";
+const isOffer = (result) => !!result.provenance;
 const isKolonial = (result) => result.provenance === "kolonial";
 const isMeny = (result) => result.provenance === "meny";
 const isEuropris = (result) => result.provenance === "europris";

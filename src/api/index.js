@@ -3,7 +3,12 @@ import fetch from "node-fetch";
 import { getJsonFetchOption, getFullFileUrl, optionFetch } from "./util";
 import cache from "./cache";
 import { shopgunOfferToAmpOffer } from "~/util/products/convert";
-import { strapiUrl, apiUrl, shopgunToken } from "~/config/vars";
+import {
+  strapiUrl,
+  apiUrl,
+  shopgunToken,
+  productCollection,
+} from "~/config/vars";
 
 export const getAutocompleteData = async () => {
   const fileName = "autocomplete-data-latest.json";
@@ -12,7 +17,6 @@ export const getAutocompleteData = async () => {
 };
 
 export const getGroceryOffer = async (uri) => {
-  const strapiCollectionName = "groceryoffers";
   // Some offers are not in our database, but the pages show up on Google searches.
   // So we find the offer with Shopgun instead, so that visitors don't see an empty page.
   if (shopgunToken && uri.startsWith("shopgun")) {
@@ -26,7 +30,7 @@ export const getGroceryOffer = async (uri) => {
       shopgunOptions,
     );
     const strapiOptionPromise = optionFetch(
-      `${strapiUrl}/${strapiCollectionName}?uri=${uri}&_limit=1`,
+      `${strapiUrl}/${productCollection}?uri=${uri}&_limit=1`,
     );
     return new Promise(async (resolve) => {
       const {
@@ -48,7 +52,7 @@ export const getGroceryOffer = async (uri) => {
   }
   // END Using Shopgun fallback.
   const { data, error } = await optionFetch(
-    `${strapiUrl}/${strapiCollectionName}?uri=${uri}&_limit=1`,
+    `${strapiUrl}/${productCollection}?uri=${uri}&_limit=1`,
   );
   if (data && data[0]) {
     return {
@@ -75,10 +79,9 @@ export const getPromotedOffers = async (offerLimit = 30) => {
   latestToday.setUTCMinutes(59);
   latestToday.setUTCHours(23);
 
-  const strapiCollectionName = "groceryoffers";
-  const strapiUrlParameterString = `validThrough_gt=${earliestToday.toISOString()}&_limit=${offerLimit}&_sort=select_method:DESC&is_promoted=true`;
+  const strapiUrlParameterString = `validThrough_gt=${earliestToday.toISOString()}&_limit=${offerLimit}&_sort=select_method:DESC`;
   const response = await fetch(
-    `${strapiUrl}/${strapiCollectionName}?${strapiUrlParameterString}`,
+    `${strapiUrl}/${productCollection}?${strapiUrlParameterString}`,
   );
   return getJsonFetchOption(response);
 };
@@ -93,20 +96,22 @@ export const searchGroceryOffers = async (query) => {
     console.log("using cache");
     return cachedResponse;
   }
-  const url = `${apiUrl}/offers/search/${encodeURIComponent(query)}`;
+  const url = `${strapiUrl}/${productCollection}?title_contains=${encodeURIComponent(
+    query,
+  )}`;
   const response = await fetch(url);
   const fetchOption = await getJsonFetchOption(response);
   cache.set(query.toLowerCase(), fetchOption);
   return fetchOption;
 };
 
-export const getCategoryOffers = async (offerType) => {
-  if (!offerType) {
+export const getCategoryOffers = async (category) => {
+  if (!category) {
     return {
-      error: new Error(`${offerType} is not a valid offer type.`),
+      error: new Error(`${category} is not a valid category.`),
     };
   }
-  const url = `${apiUrl}/offers/special/?type=${offerType}`;
+  const url = `${strapiUrl}/${productCollection}?categories_contains=${category}`;
   const response = await fetch(url);
   const fetchOption = await getJsonFetchOption(response);
   return fetchOption;

@@ -10,6 +10,7 @@ const initialState = {
   isLoadingSimilarProducts: false,
   isLoadingDetailProduct: false,
   searchResults: [],
+  filteredResults: [],
   similarProducts: [],
   categoryProducts: [],
   errorMessage: "",

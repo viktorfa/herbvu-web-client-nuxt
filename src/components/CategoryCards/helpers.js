@@ -4,17 +4,27 @@ const medister = "/medister.jpg";
 const pepsi = "/pepsi.jpeg";
 export const categories = [
   {
-    text: "Pinnekjøtt",
+    text: "Stevia",
     image: pinnekjott,
-    slug: "pinnekjott",
-    query: "pinnekjøtt",
+    slug: "stevia",
+    category: "Stevia",
   },
-  { text: "Ribbe", image: ribbe, slug: "ribbe" },
-  { text: "Medister", image: medister, slug: "medister" },
   {
-    text: "Pepsi Max",
-    image: pepsi,
-    slug: "pepsi-max",
-    offerType: "pepsi",
+    text: "Monk Fruit",
+    image: ribbe,
+    slug: "monk-fruit",
+    category: "Monk Fruit",
+  },
+  { text: "Honey", image: medister, slug: "honey", category: "Honey" },
+  {
+    text: "Maple Syrup",
+    image: medister,
+    slug: "maple-syrup",
+    category: "Maple Syrup",
+  },
+  {
+    text: "Erythritol",
+    slug: "erythritol",
+    category: "Erythritol",
   },
 ];

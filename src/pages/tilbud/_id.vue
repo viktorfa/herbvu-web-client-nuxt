@@ -1,6 +1,9 @@
 <template>
   <div>
-    <div v-show="isLoadingDetailProduct" class="flex items-center justify-center">
+    <div
+      v-show="isLoadingDetailProduct"
+      class="flex items-center justify-center"
+    >
       <AmpSpinner :size="70" :width="7" color="purple" indeterminate />
     </div>
     <div
@@ -22,9 +25,14 @@
           <ProductDetail :product="product" />
         </div>
       </div>
-      <h2 v-show="_similarProducts.length > 0" class="text-2xl m-4 text-center">Lignende varer</h2>
+      <h2 v-show="_similarProducts.length > 0" class="text-2xl m-4 text-center">
+        Lignende varer
+      </h2>
       <div>
-        <div v-show="isLoadingSimilarProducts" class="flex items-center justify-center mt-4">
+        <div
+          v-show="isLoadingSimilarProducts"
+          class="flex items-center justify-center mt-4"
+        >
           <AmpSpinner :size="40" :width="7" color="purple" indeterminate />
         </div>
         <ProductList

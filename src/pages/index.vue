@@ -1,7 +1,6 @@
 <template>
   <div>
     <div class="text-xs-center offer-search-results">
-      <ProductListBanner class="bg-red-800 text-white">Følg med på julepriskrigen</ProductListBanner>
       <CategoryCards />
       <ProductListBanner class="bg-amp-purple text-white">Utvalgte tilbud</ProductListBanner>
       <div v-if="isLoadingPromotedProducts" class="text-center absolute mx-auto w-full">

@@ -1,18 +1,21 @@
 <template>
   <div>
+    <client-only>
+      <SortAndFilterMenu />
+    </client-only>
     <div v-show="isLoading === true" class="text-3xl text-center">
       <p>finner tilbud på</p>
       <strong>{{ categoryObject.text }}</strong>
     </div>
     <div
-      v-show="categoryProducts.length === 0 && showSearchResults && !isLoading"
+      v-show="searchResults.length === 0 && showSearchResults && !isLoading"
       class="text-3xl text-center"
     >
       <p>Ingen tilbud på</p>
-      <strong>{{ categoryObject.query }}</strong>
+      <strong>{{ categoryObject.text }}</strong>
     </div>
     <div v-show="showSearchResults">
-      <SearchResults :results="categoryProducts" />
+      <SearchResults :results="filteredResults || searchResults" />
     </div>
   </div>
 </template>
@@ -22,12 +25,14 @@ import { mapState } from "vuex";
 
 import { getAllMetaInfo } from "~/util/meta-tags";
 import SearchResults from "~/components/SearchResults.vue";
+import SortAndFilterMenu from "~/components/SortAndFilterMenu.vue";
 import { categories } from "~/components/CategoryCards/helpers";
 
 export default {
   name: "CategoryPage",
   components: {
     SearchResults,
+    SortAndFilterMenu,
   },
   head() {
     return getAllMetaInfo({
@@ -38,9 +43,9 @@ export default {
     });
   },
   computed: {
-    ...mapState(["isLoading", "categoryProducts"]),
+    ...mapState(["isLoading", "searchResults", "filteredResults"]),
     showSearchResults() {
-      return !this.isLoading && !!this.categoryProducts;
+      return !this.isLoading && !!this.searchResults;
     },
     categoryObject() {
       const cat = {
@@ -64,9 +69,9 @@ export default {
   methods: {
     handleNewCategory(newCategoryObject) {
       if (newCategoryObject) {
-        if (newCategoryObject.offerType) {
+        if (newCategoryObject.category) {
           this.$store.dispatch("LOAD_CATEGORY_PRODUCTS", {
-            offerType: newCategoryObject.offerType,
+            category: newCategoryObject.category,
           });
         } else if (newCategoryObject.query) {
           this.$store.dispatch("LOAD_CATEGORY_PRODUCTS", {

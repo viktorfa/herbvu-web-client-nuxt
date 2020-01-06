@@ -1,4 +1,4 @@
-import { formatPrice } from "./lib";
+import { formatPrice } from "./products/conversion";
 
 const baseUrl = "https://allematpriser.no";
 

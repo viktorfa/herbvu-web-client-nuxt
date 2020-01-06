@@ -31,7 +31,8 @@
 <script>
 import ProductShareDialog from "~/components/ProductShareDialog";
 import AmpButton from "~/components/AmpButton";
-import { formatPrice, getDealerLogoSrc } from "~/util/products";
+import { getDealerLogoSrc } from "~/util/products";
+import { formatPrice } from "~/util/products/conversion";
 
 export default {
   name: "ProductDetail",

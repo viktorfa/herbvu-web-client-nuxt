@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="flex items-center mb-2">
+    <div class="flex items-center my-1">
       <div class="w-2/3 text-xl text-left">
         <button
           class="bg-transparent hover:bg-gray-500 text-gray-700 font-semibold hover:text-white py-1 px-4 border border-solid border-gray-500 hover:border-transparent rounded"
@@ -76,7 +76,9 @@
               @change="(event) => handleClickFilterButton({event, config, boundary: 'min'})"
             />
           </div>
-          <div class="mx-2">-</div>
+          <div class="mx-2 m-auto">
+            <span>-</span>
+          </div>
           <div class="w-full">
             <input
               id="price-max"

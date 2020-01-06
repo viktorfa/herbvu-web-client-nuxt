@@ -1,5 +1,11 @@
 import { provenanceTypes } from "~/util/enums";
-import { getShopgunOfferCatalogUrl, getProductValue } from "~/util/products";
+import { getShopgunOfferCatalogUrl } from "~/util/products";
+import {
+  formatPricing,
+  getProductValue,
+  convertPrice,
+} from "~/util/products/conversion";
+import { getItem } from "~/util/lib";
 
 export const shopgunOfferToAmpOffer = (shopgunOffer) => {
   return {
@@ -28,7 +34,7 @@ export const getStandardProduct = (product) => {
     default:
       return {
         title: product.title || product.heading,
-        price: product.pricing.price,
+        price: formatPricing(product.pricing),
         subtitle: product.description,
         description: product.description,
         dealer: product.dealer || product.provenance,
@@ -37,5 +43,18 @@ export const getStandardProduct = (product) => {
         id: product.uri,
         value: getProductValue(product),
       };
+  }
+};
+
+export const localizeProduct = (product, state) => {
+  const targetCurrency = getItem(state, ["settings", "currency"]) || "NOK";
+  try {
+    return {
+      ...product,
+      pricing: convertPrice(product.pricing, targetCurrency),
+    };
+  } catch (Error) {
+    console.warn(`Could not localize product ${product.uri}.`);
+    return product;
   }
 };

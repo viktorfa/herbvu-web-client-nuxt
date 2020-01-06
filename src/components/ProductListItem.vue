@@ -24,7 +24,8 @@
 </template>
 
 <script>
-import { formatPrice, getDealerLogoSrc } from "~/util/products";
+import { getDealerLogoSrc } from "~/util/products";
+import { formatPrice } from "~/util/products/conversion";
 export default {
   name: "ProductListItem",
   props: {

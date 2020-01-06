@@ -17,6 +17,7 @@ const initialState = {
   showDrawer: false,
   detailProduct: null,
   detailProductNotFound: false,
+  settings: { currency: "NOK" },
 };
 
 export const state = () => initialState;

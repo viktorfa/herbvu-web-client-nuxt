@@ -40,8 +40,8 @@ export const actions = {
   },
   async [productActions.LOAD_PROMOTED_PRODUCTS]({ commit }) {
     console.log("LOAD_PROMOTED_PRODUCTS");
-    const { ok, data, error } = await getPromotedOffers();
-    if (ok) {
+    const { data, error } = await getPromotedOffers();
+    if (data) {
       const filteredProducts = uniqBy(
         data,
         (offer) => offer.heading + offer.dealer + offer.pricing.price,
@@ -56,8 +56,8 @@ export const actions = {
   async [productActions.UPDATE_PROMOTED_PRODUCTS]({ commit }) {
     console.log("UPDATE_PROMOTED_PRODUCTS");
     commit(productMutations.setIsLoadingPromotedProducts, true);
-    const { ok, data, error } = await getPromotedOffers();
-    if (ok) {
+    const { data, error } = await getPromotedOffers();
+    if (data) {
       const filteredProducts = uniqBy(
         data,
         (offer) => offer.heading + offer.dealer + offer.pricing.price,
@@ -122,9 +122,9 @@ export const actions = {
     if (isProductUri(id)) {
       commit(productMutations.setIsLoadingDetailProduct, true);
 
-      const { ok, data, error } = await getGroceryOffer(id);
+      const { data, error } = await getGroceryOffer(id);
 
-      if (ok) {
+      if (data) {
         commit(productMutations.setDetailProductNotFound, false);
         commit(productMutations.setDetailProduct, data);
       } else {

@@ -1,28 +1,26 @@
-const pinnekjott = "/pinnekjott.jpg";
-const ribbe = "/ribbe.jpg";
-const medister = "/medister.jpg";
-const pepsi = "/pepsi.jpeg";
+const logo = "/icon.png";
 export const categories = [
   {
     text: "Stevia",
-    image: pinnekjott,
+    image: logo,
     slug: "stevia",
     category: "Stevia",
   },
   {
     text: "Monk Fruit",
-    image: ribbe,
+    image: logo,
     slug: "monk-fruit",
     category: "Monk Fruit",
   },
-  { text: "Honey", image: medister, slug: "honey", category: "Honey" },
+  { text: "Honey", image: logo, slug: "honey", category: "Honey" },
   {
     text: "Maple Syrup",
-    image: medister,
+    image: logo,
     slug: "maple-syrup",
     category: "Maple Syrup",
   },
   {
+    image: logo,
     text: "Erythritol",
     slug: "erythritol",
     category: "Erythritol",

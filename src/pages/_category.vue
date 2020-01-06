@@ -37,13 +37,16 @@ export default {
   head() {
     return getAllMetaInfo({
       title: this.categoryObject
-        ? `Priskrig på ${this.categoryObject.text}`
+        ? `Priser på ${this.categoryObject.text}`
         : undefined,
       image_url: this.categoryObject.image,
     });
   },
   computed: {
-    ...mapState(["isLoading", "searchResults", "filteredResults"]),
+    ...mapState(["searchResults", "filteredResults"]),
+    isLoading() {
+      return this.$store.isLoading;
+    },
     showSearchResults() {
       return !this.isLoading && !!this.searchResults;
     },

@@ -1,7 +1,7 @@
 {
-  "name": "Allematpriser",
+  "name": "HerbVu",
   "version": "1.0.0",
-  "description": "Priser på dagligvarer på nett",
+  "description": "Priser på spesielle matvarer på nett",
   "author": "viktorfa",
   "private": true,
   "scripts": {

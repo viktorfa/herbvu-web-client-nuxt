@@ -9,7 +9,7 @@
           >
             <h3
               role="button"
-              class="border-2 rounded border-red-800 text-3xl bg-white px-2"
+              class="border-2 rounded border-red-800 text-2xl bg-white px-2"
             >{{cat.text}}</h3>
           </div>
         </nuxt-link>

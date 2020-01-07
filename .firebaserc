@@ -1,12 +1,12 @@
 {
   "projects": {
-    "default": "grocery-prices"
+    "default": "herbvusite"
   },
   "targets": {
-    "grocery-prices": {
+    "herbvusite": {
       "hosting": {
-        "amp-client-nuxt": [
-          "amp-client-nuxt"
+        "herbvusite": [
+          "herbvusite"
         ]
       }
     }

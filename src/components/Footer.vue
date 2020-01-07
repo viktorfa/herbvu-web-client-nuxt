@@ -3,31 +3,32 @@
     <div class="mx-auto max-w-lg pt-8 px-1">
       <div class="flex flex-wrap">
         <div class="w-full lg:w-1/2">
-          <h2 class="text-xl">Hva gjør allematpriser?</h2>
+          <h2 class="text-xl">Hva gjør HerbVu?</h2>
           <p>
-            Vi samler inn priser på dagligvarer i Norge. Vi går automatisk gjennom nettbutikker som
+            Vi samler inn priser på spesielle matvarer som ofte lønner seg å kjøpe på nett. Vi går automatisk gjennom nettbutikker som
             <a
-              href="https://kolonial.no"
+              href="https://iherb.com"
               target="_blank"
               rel="noopener noreferrer"
-            >kolonial.no</a>,
-            <a href="https://meny.no" target="_blank" rel="noopener noreferrer">meny.no</a>, og vi henter tilbud fra tilbudsaviser. Brukere kan også selv
-            <a
-              href="https://crowdsource.allematpriser.no"
-              target="_blank"
-              rel="noopener noreferrer"
-            >legge til tilbud</a> og priser på varer.
+            >iherb.com</a>.
           </p>
           <p>
             Hvis du ønsker å bidra eller har spørsmål kan du ta kontakt på
             <a
-              href="mailto:hei@allematpriser.no"
-            >hei@allematpriser.no</a>.
+              href="mailto:hei@herbvu.com"
+            >hei@herbvu.com</a>.
           </p>
         </div>
         <div class="w-full lg:w-1/2 text-center lg:text-right">
           <h2 class="text-xl">Andre sider</h2>
           <ul class="leading-loose">
+            <li>
+              <a
+                href="https://allematpriser.no"
+                target="_blank"
+                rel="noopener noreferrer"
+              >allematpriser.no</a>
+            </li>
             <li>
               <a
                 href="https://grandispriser.no"

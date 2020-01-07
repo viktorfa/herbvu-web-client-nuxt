@@ -1,11 +1,11 @@
 import { formatPrice } from "./products/conversion";
 
-const baseUrl = "https://allematpriser.no";
+const baseUrl = "https://herbvu.com";
 
 const defaults = {
-  title: "Finn priser på dagligvarer",
+  title: "Finn priser på spesielle matvarer",
   description:
-    "Vi har oversikt over alle tilbud i tillegg til priser fra 3 nettbutikker. Norges beste fullstendige oversikt over priser på dagligvarer.",
+    "Vi gjør det enklere å finne de beste prisene på spesielle matvarer man kjøper på nett. Enten det er stevia, erythritol, lønnesirup, eller andre matvarer.",
   image_url: `${baseUrl}/logo-512x512.png`,
   site_url: `${baseUrl}/`,
 };
@@ -131,7 +131,7 @@ export const getAllMetaInfo = ({
   }
   return {
     title,
-    titleTemplate: "%s – allematpriser.no",
+    titleTemplate: "%s – herbvu.com",
     meta: getAllMetaTags({
       title,
       description,

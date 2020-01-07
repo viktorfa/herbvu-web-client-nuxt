@@ -1,5 +1,3 @@
-import kolonialLogo from "../assets/kolonial-logo.png";
-
 export const dealerLogos = {
   Rusta:
     "https://d3ikkoqs9ddhdl.cloudfront.net/img/logo/default/00imeovbz6ixqbzc.png",
@@ -41,6 +39,4 @@ export const dealerLogos = {
     "https://d3ikkoqs9ddhdl.cloudfront.net/img/logo/default/00ibththm6hm0b3i.png",
   "europris.no":
     "https://d3ikkoqs9ddhdl.cloudfront.net/img/logo/default/00icyhkb014zpw1q.png",
-  "kolonial.no": kolonialLogo,
-  kolonial: kolonialLogo,
 };

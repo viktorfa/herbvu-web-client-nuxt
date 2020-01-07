@@ -1,6 +1,6 @@
 {
   "hosting": {
-    "site": "amp-client-nuxt",
+    "site": "herbvusite",
     "public": "dist",
     "ignore": ["firebase.json", "**/.*", "**/node_modules/**"],
     "rewrites": [

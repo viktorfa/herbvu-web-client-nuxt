@@ -29,7 +29,7 @@ export default {
   /*
    ** Customize the progress-bar color
    */
-  loading: { color: "#EEC643" },
+  loading: { color: "#0d7e12" },
   /*
    ** Global CSS
    */
@@ -53,23 +53,15 @@ export default {
     [
       "@nuxtjs/sitemap",
       {
-        hostname: "https://allematpriser.no",
+        hostname: "https://herbvu.com",
         exclude: ["/sok"],
       },
     ],
     [
       "@nuxtjs/google-analytics",
       {
-        id: "UA-132355293-1",
+        id: "UA-69844447-1",
         trackEvent: true,
-      },
-    ],
-    [
-      "@nuxtjs/google-tag-manager",
-      {
-        id: "GTM-WLK7HLS",
-        respectDoNotTrack: true,
-        dev: true,
       },
     ],
   ],

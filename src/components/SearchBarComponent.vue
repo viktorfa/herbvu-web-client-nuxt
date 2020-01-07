@@ -1,5 +1,5 @@
 <template>
-  <div class="max-w-md text-xl w-full">
+  <div class="max-w-md text-xl w-full text-t2">
     <form @change.stop.prevent @submit.stop.prevent="submitSearchForm">
       <div class="flex items-center">
         <input
@@ -7,7 +7,7 @@
           type="search"
           v-model="typeInput"
           class="bg-white w-full rounded px-2 py-1"
-          placeholder="Søk i 3 nettbutikker og alle tilbud"
+          placeholder="Søk"
           @blur="handleSearchInputBlur"
           @focus="showAutocomplete = true"
           :autofocus="false"
@@ -35,7 +35,9 @@
           :value="x"
           v-for="x in [...autocomplete.slice(0, 10)]"
           class="hover:text-blue-400 my-1"
-        >{{x}}</div>
+        >
+          {{ x }}
+        </div>
       </div>
     </form>
   </div>

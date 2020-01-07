@@ -23,13 +23,6 @@
             </nuxt-link>
           </div>
           <div class="text-center text-2xl leading-loose">
-            <div>
-              <a
-                href="https://crowdsource.allematpriser.no"
-                target="_blank"
-                rel="noopener noreferrer"
-              >Legg til tilbud</a>
-            </div>
             <div class="text-gray-800">
               <span>Innstillinger</span>
             </div>

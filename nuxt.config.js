@@ -49,6 +49,7 @@ export default {
    ** Nuxt.js modules
    */
   modules: [
+    ["nuxt-purgecss"],
     ["@nuxtjs/pwa", { manifest: { lang: "no" } }],
     [
       "@nuxtjs/sitemap",
@@ -72,6 +73,7 @@ export default {
     /*
      ** You can extend webpack config here
      */
+    extractCSS: true,
     extend(config, ctx) {},
     // We instead minify with golang which is magnitudes faster
     /*html: {
@@ -93,6 +95,7 @@ export default {
     content: ["./src/**/*.vue", "./src/**/*.html"],
   },
   generate: {
+    concurrency: 100,
     async routes() {
       const prefix = "/tilbud/";
       const offers = await getOffers();

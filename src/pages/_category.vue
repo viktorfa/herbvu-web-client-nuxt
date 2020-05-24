@@ -4,14 +4,14 @@
       <SortAndFilterMenu />
     </client-only>
     <div v-show="isLoading === true" class="text-3xl text-center">
-      <p>finner tilbud på</p>
+      <p>searching for</p>
       <strong>{{ categoryObject.text }}</strong>
     </div>
     <div
       v-show="searchResults.length === 0 && showSearchResults && !isLoading"
       class="text-3xl text-center"
     >
-      <p>Ingen tilbud på</p>
+      <p>No hits on</p>
       <strong>{{ categoryObject.text }}</strong>
     </div>
     <div v-show="showSearchResults">
@@ -37,7 +37,7 @@ export default {
   head() {
     return getAllMetaInfo({
       title: this.categoryObject
-        ? `Priser på ${this.categoryObject.text}`
+        ? `Prices for ${this.categoryObject.text}`
         : undefined,
       image_url: this.categoryObject.image,
     });

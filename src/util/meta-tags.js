@@ -1,11 +1,12 @@
 import { formatPrice } from "./products/conversion";
+import config from "../page-data";
 
-const baseUrl = "https://herbvu.com";
+const { hostname, title, description } = config;
+const baseUrl = `https://${hostname}`;
 
 const defaults = {
-  title: "Finn priser på spesielle matvarer",
-  description:
-    "Vi gjør det enklere å finne de beste prisene på spesielle matvarer man kjøper på nett. Enten det er stevia, erythritol, lønnesirup, eller andre matvarer.",
+  title,
+  description,
   image_url: `${baseUrl}/logo-512x512.png`,
   site_url: `${baseUrl}/`,
 };
@@ -92,7 +93,7 @@ export const getAllMetaTags = ({ title, description, image_url, site_url }) => {
     {
       hid: "og:locale",
       property: "og:locale",
-      content: "nb_NO",
+      content: "en_US",
     },
     {
       hid: "og:type",
@@ -113,7 +114,7 @@ export const getProductDescription = ({ description, price, dealer }) => {
   if (price) {
     resultStrings.push(formatPrice(price));
   }
-  return `${resultStrings.join(" – ")}. Finn priser på alle varer og tilbud.`;
+  return `${resultStrings.join(" – ")}. ${config.slogan}.`;
 };
 
 export const getAllMetaInfo = ({
@@ -131,7 +132,7 @@ export const getAllMetaInfo = ({
   }
   return {
     title,
-    titleTemplate: "%s – herbvu.com",
+    titleTemplate: `%s – ${hostname}`,
     meta: getAllMetaTags({
       title,
       description,
@@ -145,6 +146,6 @@ export const getAllMetaInfoForProduct = (product) => {
   const title = product.title;
   const description = getProductDescription(product);
   const image_url = product.image_url;
-  const path = `/tilbud/${product.id}/`;
+  const path = `/products/${product.id}/`;
   return getAllMetaInfo({ title, description, image_url, path });
 };

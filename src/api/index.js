@@ -7,8 +7,7 @@ import {
   localizeProductResponse,
 } from "./util";
 import cache from "./cache";
-import { shopgunOfferToAmpOffer } from "~/util/products/convert";
-import { strapiUrl, shopgunToken, productCollection } from "~/config/vars";
+import { strapiUrl, productCollection } from "~/config/vars";
 
 export const getAutocompleteData = async () => {
   const fileName = "autocomplete-data-latest.json";
@@ -17,50 +16,6 @@ export const getAutocompleteData = async () => {
 };
 
 export const getGroceryOffer = async (uri, state) => {
-  // Some offers are not in our database, but the pages show up on Google searches.
-  // So we find the offer with Shopgun instead, so that visitors don't see an empty page.
-  if (shopgunToken && uri.startsWith("shopgun")) {
-    const shopgunPath = `/offers/${uri.split(":")[2]}`;
-    const shopgunOptions = {
-      headers: { "X-Token": shopgunToken, Accept: "application/json" },
-      method: "GET",
-    };
-    const shopgunOptionPromise = optionFetch(
-      `https://api.etilbudsavis.dk/v2${shopgunPath}`,
-      shopgunOptions,
-    );
-    const strapiOptionPromise = optionFetch(
-      `${strapiUrl}/${productCollection}?uri=${uri}&_limit=1`,
-    );
-    return new Promise(async (resolve) => {
-      const {
-        data: strapiResponse,
-        error: strapiError,
-      } = await strapiOptionPromise;
-      if (strapiResponse && strapiResponse[0]) {
-        resolve(
-          localizeProductResponse({ ok: true, data: strapiResponse[0] }, state),
-        );
-      }
-      const {
-        data: shopgunResponse,
-        error: shopgunError,
-      } = await shopgunOptionPromise;
-      if (shopgunResponse) {
-        resolve(
-          localizeProductResponse(
-            {
-              ok: true,
-              data: shopgunOfferToAmpOffer(shopgunResponse),
-            },
-            state,
-          ),
-        );
-      }
-      resolve({ ok: false, error: strapiError || shopgunError });
-    });
-  }
-  // END Using Shopgun fallback.
   const { data, error } = await optionFetch(
     `${strapiUrl}/${productCollection}?uri=${uri}&_limit=1`,
   );

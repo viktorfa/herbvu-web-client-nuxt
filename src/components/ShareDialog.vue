@@ -1,34 +1,48 @@
 <template>
   <div>
     <div v-if="!dialog">
-      <AmpButton text="Del" @click="dialog = true" />
+      <AmpButton text="Share" @click="dialog = true" />
     </div>
     <div v-else>
       <div
         class="fixed w-screen h-screen left-0 top-0 z-40"
         @click="dialog = false"
-        :style="{background: 'rgba(0, 0, 0, 0.4)'}"
+        :style="{ background: 'rgba(0, 0, 0, 0.4)' }"
       ></div>
-      <div class="fixed z-50 dialog-center-box bg-b1 text-t1 w-full max-w-md rounded shadow-md">
+      <div
+        class="fixed z-50 dialog-center-box bg-b1 text-t1 w-full max-w-md rounded shadow-md"
+      >
         <div class="flex flex-col items-center">
-          <div class="text-2xl my-2 text-center">{{title}}</div>
+          <div class="text-2xl my-2 text-center">{{ title }}</div>
           <input
-            class="w-full text-center"
+            class="w-full text-center text-t2"
             readonly
             type="text"
             :value="url"
             :id="`${_uid}share-url-input`"
           />
           <div class="flex justify-center">
-            <AmpButton @click="handleClickCopy" name="Kopier link" aria-label="Kopier link">
+            <AmpButton
+              @click="handleClickCopy"
+              name="Copy link"
+              aria-label="Copy link"
+            >
               <fa :icon="fa.faCopy" />
             </AmpButton>
-            <AmpButton v-for="({ icon, href }, i) in _socialLinkData" :key="i" :href="href">
+            <AmpButton
+              v-for="({ icon, href }, i) in _socialLinkData"
+              :key="i"
+              :href="href"
+            >
               <fa :icon="icon" />
             </AmpButton>
           </div>
-          <div class="text-uppercase text-gray-600" v-show="showCopySuccessMessage">Kopiert</div>
-          <div style="visibility: hidden;" v-show="!showCopySuccessMessage">_</div>
+          <div class="text-uppercase text-t1" v-show="showCopySuccessMessage">
+            Copied
+          </div>
+          <div style="visibility: hidden;" v-show="!showCopySuccessMessage">
+            _
+          </div>
         </div>
       </div>
     </div>

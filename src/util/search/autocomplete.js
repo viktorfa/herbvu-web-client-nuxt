@@ -21,16 +21,7 @@ export const initalize = async () => {
   }
 };
 
-const defaultAutocomplete = [
-  "pepsi max",
-  "grandiosa",
-  "avokado",
-  "cola",
-  "sjokolade",
-  "norvegia",
-  "smågodt",
-  "laks",
-];
+const defaultAutocomplete = ["stevia", "manuka", "brown sugar", "coconut"];
 
 export const getHints = (query, { tokens, ngrams } = autocompleteData) => {
   if (!query || query.length === 0) return defaultAutocomplete;

@@ -15,7 +15,8 @@
         @click="showMore"
         v-if="isMore"
         v-enter-viewport="useInfiniteScroll ? showMore : null"
-      >mer</AmpButton>
+        >more</AmpButton
+      >
       <br v-else />
     </div>
   </div>

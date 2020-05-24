@@ -5,26 +5,29 @@
         <fa :icon="fa.faBars" />
       </AmpButton>
     </div>
-    <div v-show="showMenu" class="w-full fixed left-0 top-0 bg-b1 h-screen z-10">
+    <div
+      v-show="showMenu"
+      class="w-full fixed left-0 top-0 bg-b1 h-screen z-10"
+    >
       <div class="max-w-sm mx-auto py-2">
         <div class="fixed right-0 h-12 flex items-center">
           <AmpButton
             class="p-2 text-2xl md:text-3xl"
             @click="handleClickButton"
-            aria-label="Lukk meny"
+            aria-label="Close menu"
           >
             <fa :icon="fa.faTimes" />
           </AmpButton>
         </div>
         <div class="flex flex-col items-center">
           <div>
-            <nuxt-link to="/" title="Hjem">
+            <nuxt-link to="/" title="Home">
               <img src="/logo-horizontal.svg" class="h-12 mx-auto" alt="Logo" />
             </nuxt-link>
           </div>
           <div class="text-center text-2xl leading-loose">
             <div class="text-gray-800">
-              <span>Innstillinger</span>
+              <span>Preferences</span>
             </div>
           </div>
         </div>
@@ -61,5 +64,4 @@ export default {
 };
 </script>
 
-<style>
-</style>
+<style></style>

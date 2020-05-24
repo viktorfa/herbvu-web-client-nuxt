@@ -25,4 +25,10 @@ export const categories = [
     slug: "erythritol",
     category: "Erythritol",
   },
+  {
+    image: logo,
+    text: "Agave Syrup",
+    slug: "agave-syrup",
+    category: "Agave Syrup",
+  },
 ];

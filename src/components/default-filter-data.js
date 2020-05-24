@@ -1,7 +1,7 @@
 export const defaultFilterOptions = {
   dealers: {
     key: "dealers",
-    text: "Butikk",
+    text: "Store",
     type: "enum",
     path: ["provenance"],
     items: [
@@ -13,19 +13,13 @@ export const defaultFilterOptions = {
   },
   price: {
     key: "price",
-    text: "Pris",
+    text: "Price",
     type: "number",
     path: ["pricing", "price"],
   },
-  promoted: {
-    key: "promoted",
-    text: "Promotert",
-    type: "boolean",
-    path: ["is_promoted"],
-  },
   category: {
     key: "category",
-    text: "Kategorier",
+    text: "Categories",
     type: "include",
     path: ["categories"],
     items: [
@@ -38,20 +32,20 @@ export const defaultFilterOptions = {
 export const defaultSortOptions = {
   price: {
     key: "price",
-    text: "Pris",
+    text: "Price",
     path: ["pricing", "price"],
     toggleable: true,
     defaultDesc: false,
   },
   size: {
     key: "size",
-    text: "Størrelse",
+    text: "Size",
     path: ["size"],
     toggleable: true,
   },
   value: {
     key: "value",
-    text: "Verdi",
+    text: "Value",
     calculation: {
       op1: ["pricing", "price"],
       operand: "/",
@@ -59,5 +53,5 @@ export const defaultSortOptions = {
     },
     defaultDesc: false,
   },
-  score: { key: "score", text: "Relevans", path: ["score"] },
+  score: { key: "score", text: "Relevance", path: ["score"] },
 };

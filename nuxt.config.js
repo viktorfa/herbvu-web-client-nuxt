@@ -7,6 +7,8 @@ dotenv.config();
 
 const { meta, title } = getAllMetaInfo();
 
+import config from "./src/page-data";
+
 export default {
   mode: "universal",
   srcDir: "src",
@@ -15,7 +17,7 @@ export default {
    */
   head: {
     title,
-    htmlAttrs: { lang: "no" },
+    htmlAttrs: { lang: "en" },
     meta: [
       ...meta,
       { charset: "utf-8" },
@@ -29,7 +31,7 @@ export default {
   /*
    ** Customize the progress-bar color
    */
-  loading: { color: "#0d7e12" },
+  loading: { color: config.bgColor },
   /*
    ** Global CSS
    */
@@ -49,19 +51,19 @@ export default {
    ** Nuxt.js modules
    */
   modules: [
-    ["nuxt-purgecss"],
-    ["@nuxtjs/pwa", { manifest: { lang: "no" } }],
+    //["nuxt-purgecss"],
+    ["@nuxtjs/pwa", { manifest: { lang: "en" } }],
     [
       "@nuxtjs/sitemap",
       {
-        hostname: "https://herbvu.com",
-        exclude: ["/sok"],
+        hostname: `https://${config.hostname}`,
+        exclude: ["/search"],
       },
     ],
     [
       "@nuxtjs/google-analytics",
       {
-        id: "UA-69844447-1",
+        id: process.env.NUXT_ENV_GA_ID,
         trackEvent: true,
       },
     ],
@@ -97,7 +99,7 @@ export default {
   generate: {
     concurrency: 100,
     async routes() {
-      const prefix = "/tilbud/";
+      const prefix = "/products/";
       const offers = await getOffers();
       console.info(`Generating ${offers.length} product pages.`);
       return [

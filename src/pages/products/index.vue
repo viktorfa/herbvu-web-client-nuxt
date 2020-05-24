@@ -1,8 +1,13 @@
 <template>
   <div>
     <div class="text-xs-center offer-search-results">
-      <ProductListBanner class="bg-amp-purple text-white">Utvalgte tilbud</ProductListBanner>
-      <div v-if="isLoadingPromotedProducts" class="text-center absolute mx-auto w-full">
+      <ProductListBanner class="bg-amp-purple text-white"
+        >Selected products</ProductListBanner
+      >
+      <div
+        v-if="isLoadingPromotedProducts"
+        class="text-center absolute mx-auto w-full"
+      >
         <AmpSpinner :size="20" :width="3" color="purple" indeterminate />
       </div>
       <PromotedProducts :products="promotedProducts" />

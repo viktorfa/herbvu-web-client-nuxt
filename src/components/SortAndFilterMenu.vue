@@ -5,26 +5,30 @@
         <button
           class="bg-transparent hover:bg-gray-500 text-gray-700 font-semibold hover:text-white py-1 px-4 border border-solid border-gray-500 hover:border-transparent rounded"
           @click="showMenu = !showMenu"
-        >{{showMenu ? "Skjul" : "Filtrer og sorter"}}</button>
+        >
+          {{ showMenu ? "Hide" : "Filter and sort" }}
+        </button>
         <button
           v-show="!!showMenu"
           class="bg-transparent hover:bg-gray-500 text-gray-700 font-semibold hover:text-white py-1 px-4 border border-solid border-gray-500 hover:border-transparent rounded"
           @click="resetOptions"
-        >{{"Tilbakestill"}}</button>
+        >
+          {{ "Reset" }}
+        </button>
       </div>
       <div class="w-1/3 text-xl text-center">
-        <span v-if="isFiltering">
-          <strong>...</strong> treff
-        </span>
+        <span v-if="isFiltering"> <strong>...</strong> hits </span>
         <span v-else>
-          <strong>{{searchResults.length}}</strong> treff
+          <strong>{{ searchResults.length }}</strong> hits
         </span>
       </div>
     </div>
     <div v-show="showMenu === true">
       <div class="flex justify-between items-center">
         <div class="flex-grow mx-2 dick"></div>
-        <div class="text-uppercase tracking-wide font-bold text-gray-700">Sorter etter</div>
+        <div class="text-uppercase tracking-wide font-bold text-gray-700">
+          Sort by
+        </div>
         <div class="flex-grow mx-2 dick"></div>
       </div>
       <div class="flex flex-wrap">
@@ -34,26 +38,40 @@
           :key="config.key"
           :checked="config.key === options.sort.key"
           :text="config.text"
-          @click.native="(event) => handleClickSortButton({event, config})"
+          @click.native="(event) => handleClickSortButton({ event, config })"
         />
       </div>
       <br />
       <div class="flex justify-between items-center">
-        <div class="border-bottom border-solid border-gray-700 flex-grow mx-2 dick"></div>
-        <div class="text-uppercase tracking-wide font-bold text-gray-700">Filtrer etter</div>
-        <div class="border-bottom border-solid border-gray-700 flex-grow mx-2 dick"></div>
+        <div
+          class="border-bottom border-solid border-gray-700 flex-grow mx-2 dick"
+        ></div>
+        <div class="text-uppercase tracking-wide font-bold text-gray-700">
+          Filter by
+        </div>
+        <div
+          class="border-bottom border-solid border-gray-700 flex-grow mx-2 dick"
+        ></div>
       </div>
-      <div v-for="config of filterOptions" :key="config.key" class="flex flex-wrap mb-2">
+      <div
+        v-for="config of filterOptions"
+        :key="config.key"
+        class="flex flex-wrap mb-2"
+      >
         <div
           class="text-uppercase tracking-wide font-bold text-gray-700 w-full"
-        >{{config.text || config.key}}</div>
+        >
+          {{ config.text || config.key }}
+        </div>
         <div v-if="config.type === 'enum'">
           <MPNCheckButton
             v-for="item of config.items"
             :key="item.key"
             :text="item.text"
             :checked="options.filter[`${config.key}.${item.key}`] !== false"
-            @click.native="(event) => handleClickFilterButton({event, config, item})"
+            @click.native="
+              (event) => handleClickFilterButton({ event, config, item })
+            "
           />
         </div>
         <div v-if="config.type === 'include'" class="w-full">
@@ -62,18 +80,23 @@
             :key="item.key"
             :text="item.text"
             :checked="options.filter[`${config.key}.${item.key}`] === true"
-            @click.native="(event) => handleClickFilterButton({event, config, item})"
+            @click.native="
+              (event) => handleClickFilterButton({ event, config, item })
+            "
           />
         </div>
         <div v-else-if="config.type === 'number'" class="flex align-center">
           <div class="w-full">
             <input
               id="price-min"
-              placeholder="Fra"
+              placeholder="From"
               class="appearance-none block bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
               style="width: 100%;"
               type="number"
-              @change="(event) => handleClickFilterButton({event, config, boundary: 'min'})"
+              @change="
+                (event) =>
+                  handleClickFilterButton({ event, config, boundary: 'min' })
+              "
             />
           </div>
           <div class="mx-2 m-auto">
@@ -83,16 +106,22 @@
             <input
               id="price-max"
               style="width: 100%;"
-              placeholder="Til"
+              placeholder="To"
               class="appearance-none block bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
               type="number"
-              @change="(event) => handleClickFilterButton({event, config, boundary: 'max'})"
+              @change="
+                (event) =>
+                  handleClickFilterButton({ event, config, boundary: 'max' })
+              "
             />
           </div>
         </div>
         <div v-else-if="config.type === 'boolean'">
           <div class="flex flex-col justify-center h-full ml-2">
-            <input type="checkbox" @change="(event) => handleClickFilterButton({event, config})" />
+            <input
+              type="checkbox"
+              @change="(event) => handleClickFilterButton({ event, config })"
+            />
           </div>
         </div>
       </div>

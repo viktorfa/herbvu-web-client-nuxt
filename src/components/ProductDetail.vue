@@ -1,14 +1,22 @@
 <template>
   <div class="shadow p-2 md:p-4">
-    <h1 class="text-3xl text-center w-full">{{product.title}}</h1>
+    <h1 class="text-3xl text-center w-full">{{ product.title }}</h1>
     <div class>
-      <img :src="product.image_url" :alt="product.title" class="product-detail-image m-auto" />
+      <img
+        :src="product.image_url"
+        :alt="product.title"
+        onerror="this.classList.add('not-loaded-product'); this.src='/icon.png';"
+        class="product-detail-image m-auto"
+      />
     </div>
-    <p class="text-red-500 text-lg" v-if="offerExpired">Dette tilbudet er dessverre utgått.</p>
+    <p class="text-red-500 text-lg" v-if="offerExpired">
+      This offer is expired.
+    </p>
     <div class="flex flex-col items-center">
       <h3 class="headline mb-0">{{ formatPrice(product.price) }}</h3>
       <div>{{ product.description }}</div>
-      <div>{{ product.value }}</div>
+      <div class="text-gray-800">{{ product.value }}</div>
+      <div class="text-gray-800">{{ product.size }}</div>
       <img
         v-if="dealerLogoSrc"
         class="dealer-logo-image"
@@ -17,9 +25,9 @@
       />
       <div v-else>{{ product.dealer }}</div>
     </div>
-    <div class="flex">
+    <div class="flex justify-center">
       <a :href="product.href" target="_blank" rel="noopener">
-        <AmpButton>Se annonse</AmpButton>
+        <AmpButton>See product</AmpButton>
       </a>
       <client-only>
         <ProductShareDialog :product="product" />
@@ -44,7 +52,7 @@ export default {
     },
     offerExpired() {
       const now = new Date();
-      const expiryDate = new Date(this.product.runTill);
+      const expiryDate = new Date(this.product.validThrough);
       if (expiryDate < now) {
         return true;
       }

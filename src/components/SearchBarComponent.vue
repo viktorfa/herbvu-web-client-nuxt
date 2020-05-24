@@ -7,16 +7,16 @@
           type="search"
           v-model="typeInput"
           class="bg-white w-full rounded px-2 py-1"
-          placeholder="Søk"
+          placeholder="Search"
           @blur="handleSearchInputBlur"
           @focus="showAutocomplete = true"
           :autofocus="false"
-          aria-label="Søk"
+          aria-label="Search"
         />
         <div
           class="flex justify-center items-center"
           style="width: 32px; margin-left: -32px;"
-          aria-label="Tilbakestill søketekst"
+          aria-label="Reset search query"
           @click="clearTypeInput"
           v-show="!!typeInput"
         >
@@ -104,10 +104,10 @@ export default {
     /** Communicates the current query with the router. */
     queryInput(newValue) {
       if (newValue && newValue.length > 0) {
-        if (this.$route.path.startsWith("/sok/")) {
-          this.$router.replace(`/sok/${newValue}`);
+        if (this.$route.path.startsWith("/search/")) {
+          this.$router.replace(`/search/${newValue}`);
         } else {
-          this.$router.push(`/sok/${newValue}`);
+          this.$router.push(`/search/${newValue}`);
         }
       }
       this.$nextTick(() => {

@@ -1,22 +1,10 @@
 import { provenanceTypes } from "~/util/enums";
-import { getShopgunOfferCatalogUrl } from "~/util/products";
 import {
   formatPricing,
   getProductValue,
   convertPrice,
 } from "~/util/products/conversion";
 import { getItem } from "~/util/lib";
-
-export const shopgunOfferToAmpOffer = (shopgunOffer) => {
-  return {
-    ...shopgunOffer,
-    title: shopgunOffer.heading,
-    image_url: shopgunOffer.images.zoom,
-    href: getShopgunOfferCatalogUrl(shopgunOffer),
-    dealer: shopgunOffer.branding.name,
-    id: `shopgun:product:${shopgunOffer.id}`,
-  };
-};
 
 export const getStandardProduct = (product) => {
   switch (product.provenance) {

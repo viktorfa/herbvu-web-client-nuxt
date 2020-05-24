@@ -4,14 +4,14 @@
       <SortAndFilterMenu />
     </client-only>
     <div v-show="isSearching === true" class="text-3xl text-center">
-      <p>søker etter</p>
+      <p>searching for</p>
       <strong>{{ queryString }}</strong>
     </div>
     <div
       v-show="searchResults.length === 0 && showSearchResults && !isSearching"
       class="text-3xl text-center"
     >
-      <p>Ingen treff på</p>
+      <p>No hits on</p>
       <strong>{{ queryString }}</strong>
     </div>
     <div v-show="showSearchResults">
@@ -35,7 +35,9 @@ export default {
   },
   head() {
     return getAllMetaInfo({
-      title: this.searchQuery ? `Tilbud på "${this.searchQuery}"` : undefined,
+      title: this.searchQuery
+        ? `Products for "${this.searchQuery}"`
+        : undefined,
     });
   },
   computed: {
@@ -60,7 +62,7 @@ export default {
           eventAction: "search",
           eventLabel: newValue,
         });
-        this.$ga.page(`/sok/?s=${newValue}`);
+        this.$ga.page(`/search/?s=${newValue}`);
       }
     },
     queryString(newQuery) {
@@ -91,5 +93,4 @@ export default {
 };
 </script>
 
-<style>
-</style>
+<style></style>

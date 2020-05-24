@@ -10,9 +10,9 @@
       v-if="!isLoadingDetailProduct && detailProductNotFound"
       class="flex flex-col items-center justify-center text-xl"
     >
-      <p>Fant ikke tilbud. Mulig varen ikke finnes lenger.</p>
+      <p>Did not find product.</p>
       <div>
-        <nuxt-link to="/" replace>Til startsiden</nuxt-link>
+        <nuxt-link to="/" replace>Home</nuxt-link>
       </div>
     </div>
     <div

@@ -2,16 +2,7 @@
 @import "./tailwind.css";
 
 .offer-search-results .result-list-item {
-  border-color: var(--offer-color);
-}
-.kolonial-search-results .result-list-item {
-  border-color: var(--kolonial-color);
-}
-.meny-search-results .result-list-item {
-  border-color: var(--meny-color);
-}
-.europris-search-results .result-list-item {
-  border-color: var(--europris-color);
+  border-color: var(--b1);
 }
 
 #main-content {
@@ -24,14 +15,39 @@ footer a:active {
   color: var(--t2) !important;
 }
 
-.dealer-logo-image {
-  object-fit: contain;
-  max-height: 32px;
-  width: 160px;
-}
-
 .center-bg-image {
   background-size: contain;
   background-repeat: no-repeat;
   background-position: center;
+}
+
+.clamp-1 {
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+}
+
+.clamp-2 {
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+
+.clamp-3 {
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+}
+
+h1 {
+  font-weight: 600;
+}
+
+.not-loaded-product {
+  filter: opacity(0.2) grayscale(100%);
+  background-repeat: no-repeat;
+  background-size: contain;
 }
